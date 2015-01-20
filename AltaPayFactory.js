@@ -13,6 +13,7 @@ AltaPayFactory.prototype.getMerchantApi = function(username, password, url) {
         , this
         , this.getLogger()
         , this.getHttp()
+        , this.getDateHelper()
     );
 };
 
@@ -45,10 +46,31 @@ AltaPayFactory.prototype.getHttp = function() {
 };
 
 /**
+ * @returns {PaymentRequestBase}
+ */
+AltaPayFactory.prototype.getPaymentRequestBase = function() {
+    return new PaymentRequestBase(this.getPaymentRequestConfig());
+};
+
+/**
  * @returns {PaymentRequest}
  */
 AltaPayFactory.prototype.getPaymentRequest = function() {
-    return new PaymentRequest(this.getPaymentRequestConfig());
+    return new PaymentRequest(this.getPaymentRequestBase(), this.getCustomerInfo());
+};
+
+/**
+ * @returns {CustomerInfo}
+ */
+AltaPayFactory.prototype.getCustomerInfo = function() {
+    return new CustomerInfo(this.getCustomerAddress(), this.getCustomerAddress());
+};
+
+/**
+ * @returns {CustomerAddress}
+ */
+AltaPayFactory.prototype.getCustomerAddress = function() {
+    return new CustomerAddress();
 };
 
 /**
@@ -56,4 +78,11 @@ AltaPayFactory.prototype.getPaymentRequest = function() {
  */
 AltaPayFactory.prototype.getPaymentRequestConfig = function() {
     return new PaymentRequestConfig();
+};
+
+/**
+ * @returns {DateHelper}
+ */
+AltaPayFactory.prototype.getDateHelper = function() {
+    return new DateHelper();
 };
