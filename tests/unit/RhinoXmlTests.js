@@ -7,7 +7,7 @@ var RhinoXmlTests = {
 	{
 		var anonObject = rhinoXml.deserialize("<simple><xml>With content</xml></simple>");
 
-		Assert.equals("With content !",anonObject.xml);
+		Assert.equals("With content",anonObject.xml);
 	},
 	arrayTest : function()
 	{
