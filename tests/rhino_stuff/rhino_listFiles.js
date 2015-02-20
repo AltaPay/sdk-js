@@ -13,7 +13,7 @@ importPackage(java.io);
 // The first is a string representing a directory path
 // The second is a closure that accepts a parameter of type
 // java.io.File
-function hat(dir, recursive) {
+function listFiles(dir, recursive) {
     var files = [];
     recursive = recursive || true;
 
@@ -28,7 +28,7 @@ function hat(dir, recursive) {
         // so that we end up doing a scan of
         // the directory tree
         if (lst[i].isDirectory() && recursive) {
-            files = files.concat(hat(lst[i].getCanonicalFile()));
+            files = files.concat(listFiles(lst[i].getCanonicalFile()));
         }
         else {
             files.push(lst[i]);
