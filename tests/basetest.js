@@ -85,33 +85,42 @@ Test.prototype.run = function(fromDir)
 				}
 				testObject[test]();
 				console.logChar('.');
-
 			}
 			catch(e)
 			{
+
 				errors.push(testObjectName+"."+test+": "+e);
+
 				console.logChar('e');
+
 				junitTest['@message'] = e;
+
 				junitTest['@type'] = 'error';
+
+
 			}
 			this.junit.push({'testcase':junitTest});
 		}
 
+
+
 		console.log("");
-
-		if(errors.length > 0)
-		{
-			console.log("");
-			console.log("Errors:");
-			for(var i in errors)
-			{
-				console.log(errors[i]);
-			}
-		}
-		console.log("");
-
-
 	}
+
+
+
+
+	if(errors.length > 0)
+	{
+		console.log("");
+		console.log("Errors:");
+		for(var errorsIndex in errors)
+		{
+			console.log(errors[errorsIndex]);
+		}
+	}
+	console.log("");
+
 };
 
 Test.prototype.getJunitResult = function()
