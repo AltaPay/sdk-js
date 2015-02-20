@@ -16,11 +16,61 @@ RhinoXml.prototype.deserialize = function(xmlString) {
 
 	var doc = builder.parse(new org.xml.sax.InputSource(new java.io.StringReader(xmlString)));
 
-	var iterator = doc.createNodeIterator(doc.getDocumentElement(), org.w3c.dom.traversal.NodeFilter.SHOW_ELEMENT, null, true);
-
 	return this.traverseXmlDom(doc.getDocumentElement());
 };
 
+RhinoXml.prototype.serialize = function(rootName,object) {
+	var builder = javax.xml.parsers.DocumentBuilderFactory.newInstance().newDocumentBuilder()
+
+	var doc = builder.newDocument();
+
+	var element = doc.createElement(rootName);
+	doc.appendChild(element);
+
+	this.buildDom(doc, element, object);
+
+	var source = new javax.xml.transform.dom.DOMSource(doc);
+	var stringWriter = new java.io.StringWriter();
+	var streamResult = new javax.xml.transform.stream.StreamResult(stringWriter);
+	var transformerFactory = new javax.xml.transform.TransformerFactory.newInstance();
+	var transformer = transformerFactory.newTransformer();
+	transformer.transform(source, streamResult);
+	return stringWriter.toString();
+};
+
+RhinoXml.prototype.buildDom = function(doc, element, object)
+{
+	if(Object.prototype.toString.call( object ) === '[object Array]' )
+	{
+		for(var i in object)
+		{
+			this.buildDom(doc, element, object[i]);
+		}
+	}
+	else
+	{
+		for(var x in object)
+		{
+			if(x.substr(0,1) == '@')
+			{
+				element.setAttribute(x.substr(1),object[x]);
+			}
+			else
+			{
+				var e = doc.createElement(x);
+				if(typeof(object[x]) == 'object')
+				{
+					this.buildDom(doc, e, object[x]);
+				}
+				else
+				{
+					e.setTextContent(object[x]);
+				}
+				element.appendChild(e);
+			}
+		}
+	}
+};
 
 RhinoXml.prototype.traverseXmlDom = function(element) {
 

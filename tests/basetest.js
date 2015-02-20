@@ -23,13 +23,14 @@ function Test() {
 
 	this.testFile = null;
 	this.testMethod = null;
+	this.junit = [];
 
 
 	var params = java.lang.System.getProperty("sun.java.command").split(" ");
 
 	if(params[2] && (params[2].trim().length() > 0))
 	{
-		this.testFile = baseName(params[2]);
+		this.testFile = this.baseName(params[2]);
 	}
 
 	if(params[3] && params[3].trim().length() > 0)
@@ -75,6 +76,7 @@ Test.prototype.run = function(fromDir)
 			{
 				continue;
 			}
+			var junitTest = {'@classname':testObjectName,'@name':test};
 			try
 			{
 				if(testObject['setup'])
@@ -86,28 +88,42 @@ Test.prototype.run = function(fromDir)
 			}
 			catch(e)
 			{
+
 				errors.push(testObjectName+"."+test+": "+e);
+
 				console.logChar('e');
+				junitTest.error = {'@message':e, '@type':'error'};
+
 			}
+			this.junit.push({'testcase':junitTest});
 		}
 
+
+
 		console.log("");
-
-		if(errors.length > 0)
-		{
-			console.log("");
-			console.log("Errors:");
-			for(var i in errors)
-			{
-				console.log(errors[i]);
-			}
-		}
-		console.log("");
-
-
 	}
 
+
+
+
+	if(errors.length > 0)
+	{
+		console.log("");
+		console.log("Errors:");
+		for(var errorsIndex in errors)
+		{
+			console.log(errors[errorsIndex]);
+		}
+	}
+	console.log("");
+
 };
+
+Test.prototype.getJunitResult = function()
+{
+	var xml = new RhinoXml();
+	return xml.serialize('testsuite',this.junit);
+}
 
 
 
