@@ -1,6 +1,6 @@
 
 
-var factory = new AltaPayFactory();
+var factory = new RhinoAltaPayFactory(new AltaPayFactory());
 
 var mapi = factory.getMerchantApi('shop api', 'testpassword', 'http://gateway.dev.earth.pensio.com');
 

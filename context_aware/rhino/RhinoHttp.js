@@ -1,5 +1,9 @@
+/**
+ * @implements {Http}
+ * @constructor
+ */
+function RhinoHttp() {
 
-function NodeJsHttp() {
 }
 
 /**
@@ -8,7 +12,7 @@ function NodeJsHttp() {
  * @param parameters {object}
  * @param headers {object}
  */
-NodeJsHttp.prototype.get = function(url, parameters, headers) {
+RhinoHttp.prototype.get = function(url, parameters, headers) {
 
 };
 
@@ -19,6 +23,6 @@ NodeJsHttp.prototype.get = function(url, parameters, headers) {
  * @param parameters {object}
  * @param headers {object}
  */
-NodeJsHttp.prototype.post = function(url, parameters, headers) {
+RhinoHttp.prototype.post = function(url, parameters, headers) {
 
 };
