@@ -22,13 +22,22 @@ var Assert = {
 var testFile = null;
 var testMethod = null;
 
-var params = java.lang.System.getProperty("sun.java.command").split(" ");
-if(params[2])
+function baseName(str)
 {
-	testFile = params[2];
+	var base = new String(str).substring(str.lastIndexOf('/') + 1);
+	if(base.lastIndexOf(".") != -1)
+		base = base.substring(0, base.lastIndexOf("."));
+	return base;
 }
 
-if(params[3])
+var params = java.lang.System.getProperty("sun.java.command").split(" ");
+
+if(params[2] && (params[2].trim().length() > 0))
+{
+	testFile = baseName(params[2]);
+}
+
+if(params[3] && params[3].trim().length() > 0)
 {
 	testMethod = params[3];
 }
