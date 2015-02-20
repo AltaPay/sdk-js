@@ -50,7 +50,21 @@ RhinoXml.prototype.traverseXmlDom = function(element) {
 		}
 		else if(childNode.getNodeType() == 1)
 		{
-			result[childNode.getTagName()] = this.traverseXmlDom(childNode);
+			if(result[childNode.getTagName()])
+			{
+				if(Object.prototype.toString.call( result[childNode.getTagName()] ) !== '[object Array]' )
+				{
+					var oldValue = result[childNode.getTagName()];
+					result[childNode.getTagName()] = [oldValue];
+				}
+
+				result[childNode.getTagName()].push(this.traverseXmlDom(childNode));
+			}
+			else
+			{
+				result[childNode.getTagName()] = this.traverseXmlDom(childNode);
+			}
+
 
 		}
 		else
