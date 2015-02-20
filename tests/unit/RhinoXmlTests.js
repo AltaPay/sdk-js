@@ -24,6 +24,34 @@ var RhinoXmlTests = {
 
 		Assert.equals("20141202",anonObject['@version']);
 		Assert.equals("2015-02-20T10:12:46+01:00",anonObject.Header.Date);
+	},
+
+	serializeSimple : function()
+	{
+		var simple = {xml:'With content'};
+
+		Assert.equals('<?xml version="1.0" encoding="UTF-8" standalone="no"?><simple><xml>With content</xml></simple>',rhinoXml.serialize("simple",simple));
+	},
+
+	serializeDeepStructure : function()
+	{
+		var simple = {xml:{deep:'structure'}};
+
+		Assert.equals('<?xml version="1.0" encoding="UTF-8" standalone="no"?><simple><xml><deep>structure</deep></xml></simple>',rhinoXml.serialize("simple",simple));
+	},
+
+	serializeWithArrays : function()
+	{
+		var simple = {xml:[{hat:'bowler'}, {hat:'top'}]};
+
+		Assert.equals('<?xml version="1.0" encoding="UTF-8" standalone="no"?><simple><xml><hat>bowler</hat><hat>top</hat></xml></simple>',rhinoXml.serialize("simple",simple));
+	},
+
+	serializeWithAttributes : function()
+	{
+		var simple = {'@muh':'cow'};
+
+		Assert.equals('<?xml version="1.0" encoding="UTF-8" standalone="no"?><simple muh="cow"/>',rhinoXml.serialize("simple",simple));
 	}
 }
 
