@@ -92,11 +92,7 @@ Test.prototype.run = function(fromDir)
 				errors.push(testObjectName+"."+test+": "+e);
 
 				console.logChar('e');
-
-				junitTest['@message'] = e;
-
-				junitTest['@type'] = 'error';
-
+				junitTest.error = {'@message':e, '@type':'error'};
 
 			}
 			this.junit.push({'testcase':junitTest});
