@@ -2,6 +2,8 @@
 
 load('tests/rhino_stuff/rhino_listFiles.js');
 load('tests/rhino_stuff/rhino_load_sdk.js');
+load('tests/jshamcrest.js');
+load('tests/jsmockito-1.0.4.js');
 
 var Assert = {
 	equals : function(expected, actual, message)
@@ -17,6 +19,19 @@ var Assert = {
 	}
 };
 
+var testFile = null;
+var testMethod = null;
+
+var params = java.lang.System.getProperty("sun.java.command").split(" ");
+if(params[2])
+{
+	testFile = params[2];
+}
+
+if(params[3])
+{
+	testMethod = params[3];
+}
 
 
 var testFiles = listFiles('tests/unit/');
@@ -26,13 +41,31 @@ for (var i=0; i<testFiles.length; i++) {
 	load(testFiles[i].getCanonicalFile());
 
 	var testObjectName = testFiles[i].getName().replace('.js','');
+
+	if(testFile != null && testFile != testObjectName)
+	{
+		continue;
+	}
+
 	console.log(testObjectName);
 
 	eval.call(null,"var testObject = "+testObjectName);
 	for(var test in testObject)
 	{
+		if(test == 'setup')
+		{
+			continue;
+		}
+		if(testMethod != null && testMethod != test)
+		{
+			continue;
+		}
 		try
 		{
+			if(testObject['setup'])
+			{
+				testObject.setup();
+			}
 			testObject[test]();
 			console.logChar('.');
 		}
