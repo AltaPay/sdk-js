@@ -16,6 +16,7 @@ AltaPayFactory.prototype.getMerchantApi = function(username, password, url) {
 		, this.getDateHelper()
 		, this.getXml()
 		, this.getResponseFactory()
+		, this.getBase64()
 	);
 };
 
@@ -101,4 +102,11 @@ AltaPayFactory.prototype.getDateHelper = function() {
  */
 AltaPayFactory.prototype.getResponseFactory = function () {
 	return new ResponseFactory();
+};
+
+/**
+ * @returns {ResponseFactory}
+ */
+AltaPayFactory.prototype.getBase64 = function () {
+	return new Base64();
 };
