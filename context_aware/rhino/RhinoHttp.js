@@ -12,6 +12,7 @@ function RhinoHttp() {
  * @param url
  * @param parameters {object}
  * @param headers {object}
+ * @return {string}
  */
 RhinoHttp.prototype.get = function(url, parameters, headers) {
 	var query = this.buildParameterString(parameters);
@@ -30,6 +31,7 @@ RhinoHttp.prototype.get = function(url, parameters, headers) {
  * @param url
  * @param parameters {object}
  * @param headers {object}
+ * @return {string}
  */
 RhinoHttp.prototype.post = function(url, parameters, headers) {
 
@@ -39,6 +41,7 @@ RhinoHttp.prototype.post = function(url, parameters, headers) {
  * Read response input stream into a string
  * @param is
  * @returns {string}
+ * @private
  */
 RhinoHttp.prototype.inputStreamToString = function(is){
 	var ch;
@@ -56,6 +59,7 @@ RhinoHttp.prototype.inputStreamToString = function(is){
  *
  * @param params {object}
  * @returns {string}
+ * @private
  */
 RhinoHttp.prototype.buildParameterString = function(params)
 {
@@ -94,6 +98,7 @@ RhinoHttp.prototype.buildParameterString = function(params)
  * @param p
  * @param params {object}
  * @returns {string}
+ * @private
  */
 RhinoHttp.prototype.getParameterListString = function(p, params)
 {
@@ -123,6 +128,12 @@ RhinoHttp.prototype.getParameterListString = function(p, params)
 	return str;
 }
 
+/**
+ *
+ * @param value
+ * @returns {string}
+ * @private
+ */
 RhinoHttp.prototype.urlEncode = function(value)
 {
 	return java.net.URLEncoder.encode(value, this.charset)
