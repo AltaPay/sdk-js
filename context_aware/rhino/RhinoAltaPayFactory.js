@@ -22,3 +22,11 @@ function RhinoAltaPayFactory(baseFactory) {
 RhinoAltaPayFactory.prototype.getHttp = function() {
     return new RhinoHttp();
 };
+
+/**
+ * @returns {Xml}
+ */
+AltaPayFactory.prototype.getXml = function() {
+	return new RhinoXml();
+};
+
