@@ -37,7 +37,22 @@ RhinoHttp.prototype.get = function(url, parameters, headers) {
  * @return {string}
  */
 RhinoHttp.prototype.post = function(url, parameters, headers) {
+	var post = this.httpHelper.buildParameterString(this.httpHelper.getHttpHash(parameters));
+	var connection = java.net.URL(url).openConnection();
+	for (var key in headers)
+	{
+		connection.setRequestProperty(key, headers[key]);
+	}
+	connection.setDoInput(true);
+	connection.setDoOutput(true);
+	connection.setUseCaches(false);
+	connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+	var printout = new java.io.DataOutputStream(connection.getOutputStream());
+	printout.writeBytes(post);
+	printout.flush();
+	printout.close();
 
+	return this.inputStreamToString(connection.getInputStream());
 };
 
 /**
