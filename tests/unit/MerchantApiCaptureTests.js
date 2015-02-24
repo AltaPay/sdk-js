@@ -11,6 +11,7 @@ var dateHelper;
 var xml;
 var responseFactory;
 var request;
+var base64;
 
 var api;
 
@@ -28,7 +29,16 @@ var MerchantApiCaptureTests = {
 		xml = JsMockito.mock(Xml);
 		request = JsMockito.mock(CaptureRequest);
 		responseFactory = JsMockito.mock(ResponseFactory);
-		api = new MerchantApi('username','password','url',factory, logger, http, dateHelper, xml,responseFactory);
+		base64 = new Base64();
+
+		api = new MerchantApi('username','password','url',factory, logger, http, dateHelper, xml,responseFactory, base64);
+	},
+
+	callHttpWithAuthorisationParameters : function()
+	{
+		api.capture(request);
+
+		JsMockito.verify(http).post(JsHamcrest.Matchers.anything(), JsHamcrest.Matchers.anything(), AltaPayMatchers.objectEquals({'Authorization':'Basic dXNlcm5hbWU6cGFzc3dvcmQ='}));
 	},
 
 	callHttpWithCorrectParameters : function()
@@ -39,7 +49,7 @@ var MerchantApiCaptureTests = {
 
 		api.capture(request);
 
-		JsMockito.verify(http).post('url/merchant/API/captureReservation', theHash);
+		JsMockito.verify(http).post('url/merchant/API/captureReservation', theHash, JsHamcrest.Matchers.anything());
 	},
 
 	deserializeResponseFromPost : function()

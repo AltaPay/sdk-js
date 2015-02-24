@@ -19,6 +19,22 @@ var Assert = {
 	}
 };
 
+var AltaPayMatchers = {
+
+	objectEquals : function(expected)
+	{
+		return new JsHamcrest.SimpleMatcher({
+			matches: function(actual) {
+				return JsHamcrest.areMapsEquivalent(expected, actual);
+			},
+
+			describeTo: function(description) {
+				description.append('matches map');
+			}
+		});
+	}
+};
+
 function Test() {
 
 	this.testFile = null;
