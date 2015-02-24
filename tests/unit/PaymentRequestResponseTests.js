@@ -35,7 +35,7 @@ var PaymentRequestResponseTests = {
 		Assert.equals('Some message', paymentRequestResponse.getErrorMessage());
 	},
 
-	getUrl_whenNoError : function()
+	getUrl_ifNoError_returnUrl : function()
 	{
 		var paymentRequestResponse = new PaymentRequestResponse({
 			Header:{
@@ -51,7 +51,7 @@ var PaymentRequestResponseTests = {
 		Assert.equals('Some url', paymentRequestResponse.getUrl());
 	},
 
-	getUrl_whenError : function()
+	getUrl_ifError_returnNull : function()
 	{
 		var paymentRequestResponse = new PaymentRequestResponse({
 			Header:{
@@ -63,7 +63,7 @@ var PaymentRequestResponseTests = {
 		Assert.equals(null, paymentRequestResponse.getUrl());
 	},
 
-	getDynamicJavascriptUrl_whenNoError : function()
+	getDynamicJavascriptUrl_ifNoError_returnDynamicJavascriptUrl : function()
 	{
 		var paymentRequestResponse = new PaymentRequestResponse({
 			Header:{
@@ -72,14 +72,14 @@ var PaymentRequestResponseTests = {
 			},
 			Body:{
 				Result:'Success',
-				DynamicJavascriptUrl:'Some url'
+				DynamicJavascriptUrl:'Some dynamicJavascriptUrl'
 			}
 		});
 
-		Assert.equals('Some url', paymentRequestResponse.getDynamicJavascriptUrl());
+		Assert.equals('Some dynamicJavascriptUrl', paymentRequestResponse.getDynamicJavascriptUrl());
 	},
 
-	getDynamicJavascriptUrl_whenError : function()
+	getDynamicJavascriptUrl_ifError_returnNull : function()
 	{
 		var paymentRequestResponse = new PaymentRequestResponse({
 			Header:{
