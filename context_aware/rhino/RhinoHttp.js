@@ -1,9 +1,13 @@
 /**
+ *
  * @implements {Http}
  * @constructor
+ * @param xml {Xml}
+ * @param httpHelper {HttpHelper}
  */
-function RhinoHttp() {
-	this.xml = new RhinoXml();
+function RhinoHttp(xml, httpHelper) {
+	this.xml = xml;
+	this.httpHelper = httpHelper;
 	this.charset = "UTF-8";
 }
 
@@ -15,8 +19,7 @@ function RhinoHttp() {
  * @return {string}
  */
 RhinoHttp.prototype.get = function(url, parameters, headers) {
-	var query = this.buildParameterString(parameters);
-
+	var query = this.httpHelper.buildParameterString(this.httpHelper.getHttpHash(parameters));
 	var connection = java.net.URL(url + "?" + query).openConnection();
 	for (var key in headers)
 	{
@@ -53,88 +56,4 @@ RhinoHttp.prototype.inputStreamToString = function(is){
 		sb.append(java.lang.Character(ch));
 	}
 	return sb.toString();
-}
-
-/**
- *
- * @param params {object}
- * @returns {string}
- * @private
- */
-RhinoHttp.prototype.buildParameterString = function(params)
-{
-	var str = '';
-	var first = true;
-	for (var p in params)
-	{
-		var tmpStr = '';
-		if ('object' === typeof params[p])
-		{
-			tmpStr += this.getParameterListString(p, params[p]);
-		}
-		else if (null !== params[p] && '' !== params[p])
-		{
-			tmpStr += p + '=' + this.urlEncode(params[p]);
-		}
-
-		if (tmpStr != '')
-		{
-			if (first)
-			{
-				first = false;
-				str += tmpStr;
-			}
-			else
-			{
-				str += '&' + tmpStr;
-			}
-		}
-	}
-	return str;
-}
-
-/**
- *
- * @param p
- * @param params {object}
- * @returns {string}
- * @private
- */
-RhinoHttp.prototype.getParameterListString = function(p, params)
-{
-	var str = '';
-	var first = true;
-	for (var k in params)
-	{
-		var tmpStr = '';
-		if (null !== params[p] && undefined !== params[p])
-		{
-			tmpStr += p + '[' + k + ']=' + this.urlEncode(params[p]);
-		}
-
-		if (tmpStr != '')
-		{
-			if (first)
-			{
-				first = false;
-				str += tmpStr;
-			}
-			else
-			{
-				str += '&' + tmpStr;
-			}
-		}
-	}
-	return str;
-}
-
-/**
- *
- * @param value
- * @returns {string}
- * @private
- */
-RhinoHttp.prototype.urlEncode = function(value)
-{
-	return java.net.URLEncoder.encode(value, this.charset)
 }

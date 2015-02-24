@@ -110,3 +110,10 @@ AltaPayFactory.prototype.getResponseFactory = function () {
 AltaPayFactory.prototype.getBase64 = function () {
 	return new Base64();
 };
+
+/**
+ * @returns {HttpHelper}
+ */
+AltaPayFactory.prototype.getHttpHelper = function() {
+	return new HttpHelper();
+}

@@ -14,7 +14,7 @@ function RhinoAltaPayFactory(baseFactory) {
  * @returns {Http}
  */
 RhinoAltaPayFactory.prototype.getHttp = function() {
-	return new RhinoHttp();
+	return new RhinoHttp(this.getXml(),this.getHttpHelper());
 };
 
 /**

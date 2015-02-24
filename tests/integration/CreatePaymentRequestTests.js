@@ -4,7 +4,7 @@ var CreatePaymentRequestTests = {
 	{
 		var factory = new RhinoAltaPayFactory(new AltaPayFactory());
 
-		var mapi = factory.getMerchantApi('shop api', 'testpassword', 'http://gateway.dev.earth.pensio.com');
+		var mapi = factory.getMerchantApi('shop api', 'testpassword', 'http://gateway.dev.pensio.com');
 
 		var request = factory.getPaymentRequest();
 		request.terminal = 'AltaPay Soap Test Terminal';
@@ -13,7 +13,7 @@ var CreatePaymentRequestTests = {
 		request.currency = 'EUR';
 
 		var response = mapi.createPaymentRequest(request);
-		Assert.equals("Success", response.Body.Result)
+		Assert.equals(true, response.success())
 	}
 
 }
