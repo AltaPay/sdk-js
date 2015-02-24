@@ -7,20 +7,14 @@
  * @constructor
  */
 function RhinoAltaPayFactory(baseFactory) {
-    // extend the base factory
-    for (var x in baseFactory) {
-        // only override the stuff that we have not implemented here
-        if (!this[x]) {
-            this[x] = baseFactory[x];
-        }
-    }
+	ObjectHelper.extend(this, baseFactory);
 }
 
 /**
  * @returns {Http}
  */
 RhinoAltaPayFactory.prototype.getHttp = function() {
-    return new RhinoHttp();
+	return new RhinoHttp();
 };
 
 /**
