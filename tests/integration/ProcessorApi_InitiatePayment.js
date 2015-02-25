@@ -134,6 +134,33 @@ var ProcessorApi_InitiatePayment = {
 		var response = papi.initiatePayment(request);
 
 		Assert.equals(true, response.success(), "Error: "+response.getErrorMessage());
+	},
+
+	initiatePayment_fraudService : function()
+	{
+		var request = factory.getInitiatePaymentRequest();
+
+		request.amount = 101;
+		request.terminal = 'AltaPay Test Terminal';
+		request.currency = 'EUR';
+		request.creditCard.cardnum = '4111111111111111';
+		request.creditCard.emonth = '11';
+		request.creditCard.eyear = '2020';
+		request.creditCard.cvc = '123';
+		request.shopOrderid = 'InitiatePayment_'+(new Date()).getTime();
+		request.customerInfo.billingAddress.firstName = 'billing first name';
+		request.customerInfo.billingAddress.lastName = 'billing last name';
+		request.customerInfo.billingAddress.address = 'billing address';
+		request.customerInfo.billingAddress.city = 'billing city';
+		request.customerInfo.billingAddress.region = 'billing region';
+		request.customerInfo.billingAddress.postalCode = 'billing postal';
+		request.customerInfo.billingAddress.country = 'DK';
+		request.fraudService = 'test';
+
+		var response = papi.initiatePayment(request);
+
+		Assert.equals(true, response.success(), "Error: "+response.getErrorMessage());
+		Assert.equals(FraudRecommendation.Accept, response.getFraudRecommendation());
 	}
 
 

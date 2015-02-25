@@ -14,6 +14,41 @@ var InitiatePaymentResponseTests = {
 
 		Assert.equals('payment info',response.getPaymentInfo('another'));
 		Assert.equals('hat',response.getPaymentInfo('wah_wah'));
+	},
+
+	getFraudRecommendation_accept : function()
+	{
+		var response = new InitiatePaymentResponse({Body:{Transactions:{Transaction:{FraudRecommendation:'Accept'}}}});
+
+		Assert.equals(FraudRecommendation.Accept,response.getFraudRecommendation());
+	},
+
+	getFraudRecommendation_challenge : function()
+	{
+		var response = new InitiatePaymentResponse({Body:{Transactions:{Transaction:{FraudRecommendation:'Challenge'}}}});
+
+		Assert.equals(FraudRecommendation.Challenge,response.getFraudRecommendation());
+	},
+
+	getFraudRecommendation_doesntExist : function()
+	{
+		var response = new InitiatePaymentResponse({Body:{Transactions:{Transaction:{}}}});
+
+		Assert.equals(FraudRecommendation.Unknown,response.getFraudRecommendation());
+	},
+
+	getFraudRecommendation_paymentDoesntExist : function()
+	{
+		var response = new InitiatePaymentResponse({Header:{}, Body:{}});
+
+		Assert.equals(FraudRecommendation.Unknown,response.getFraudRecommendation());
+	},
+
+	getFraudRecommendation_bodyDoesntExist : function()
+	{
+		var response = new InitiatePaymentResponse({Header:{}});
+
+		Assert.equals(FraudRecommendation.Unknown,response.getFraudRecommendation());
 	}
 
 }
