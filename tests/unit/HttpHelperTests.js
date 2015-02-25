@@ -50,8 +50,8 @@ var HttpHelperTests = {
 
 	buildParameterString_urlEncodes : function()
 	{
-		var actual = httpHelper.buildParameterString({'"#%&/=?':'"#%&/=?',element2:'value2'});
+		var actual = httpHelper.buildParameterString({'"#%&/=?':'"#%&/=?','element2[hat]':'value2'});
 
-		Assert.equals('%22%23%25%26%2F%3D%3F=%22%23%25%26%2F%3D%3F&element2=value2', actual);
+		Assert.equals('%22%23%25%26%2F%3D%3F=%22%23%25%26%2F%3D%3F&element2%5Bhat%5D=value2', actual);
 	}
 };
