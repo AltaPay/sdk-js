@@ -54,6 +54,28 @@ var ProcessorApi_InitiatePayment = {
 		var response = papi.initiatePayment(request);
 
 		Assert.equals(true, response.success());
+	},
+
+	initiatePayment_paymentInfo : function()
+	{
+		var request = factory.getInitiatePaymentRequest();
+
+		request.amount = 30.30;
+		request.terminal = 'AltaPay Test Terminal';
+		request.currency = 'EUR';
+		request.creditCard.cardnum = '4561234561234561';
+		request.creditCard.emonth = '11';
+		request.creditCard.eyear = '2020';
+		request.creditCard.cvc = '123';
+		request.shopOrderid = 'InitiatePayment_'+(new Date()).getTime();
+		request.addPaymentInfo('wah wah', 'hat');
+		request.addPaymentInfo('another', 'payment info');
+
+		var response = papi.initiatePayment(request);
+
+		Assert.equals(true, response.success());
+		Assert.equals('hat', response.getPaymentInfo('wah_wah'));
+		Assert.equals('payment info', response.getPaymentInfo('another'));
 	}
 
 

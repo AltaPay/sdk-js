@@ -88,15 +88,26 @@ RhinoXml.prototype.traverseXmlDom = function(element) {
 		}
 	}
 
+	if(childNodes.getLength() == 0)
+	{
+		return null;
+	}
+
 	for(var i = 0;i < childNodes.getLength();i++)
 	{
 		var childNode = childNodes.item(i);
 
-
-
-		if(childNode.getNodeType() == 3)
+		if(childNode.getNodeType() == 3 || childNode.getNodeType() == 4)
 		{
-			return childNode.getTextContent();
+			if(Object.keys(result).length > 0)
+			{
+				result['@'] = childNode.getTextContent();
+			}
+			else
+			{
+				return childNode.getTextContent();
+			}
+
 		}
 		else if(childNode.getNodeType() == 1)
 		{
@@ -114,8 +125,6 @@ RhinoXml.prototype.traverseXmlDom = function(element) {
 			{
 				result[childNode.getTagName()] = this.traverseXmlDom(childNode);
 			}
-
-
 		}
 		else
 		{

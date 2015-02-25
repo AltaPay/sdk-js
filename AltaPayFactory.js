@@ -72,7 +72,7 @@ AltaPayFactory.prototype.getXml = function() {
  * @returns {PaymentRequestBase}
  */
 AltaPayFactory.prototype.getPaymentRequestBase = function() {
-	return new PaymentRequestBase(this.getPaymentRequestConfig());
+	return new PaymentRequestBase(this.getPaymentRequestConfig(), this.getPaymentInfo());
 };
 
 /**
@@ -101,6 +101,13 @@ AltaPayFactory.prototype.getCreditCard = function() {
  */
 AltaPayFactory.prototype.getBaseRequest = function() {
 	return new BaseRequest();
+};
+
+/**
+ * @returns {PaymentInfo}
+ */
+AltaPayFactory.prototype.getPaymentInfo = function() {
+	return new PaymentInfo(this.getBaseRequest());
 };
 
 /**
