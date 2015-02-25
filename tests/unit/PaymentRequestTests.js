@@ -2,11 +2,10 @@
 var factory;
 var request;
 
-var InitiatePaymentRequestTests = {
-
+var PaymentRequestTests = {
 	setup: function () {
 		factory = new UnitTestAltaPayFactory();
-		request = factory.getInitiatePaymentRequest();
+		request = factory.getPaymentRequest();
 	},
 
 	toHash_orderLines: function () {
