@@ -106,7 +106,6 @@ Test.prototype.run = function(fromDir)
 			{
 
 				errors.push(testObjectName+"."+test+": "+e);
-
 				console.logChar('e');
 				junitTest.error = {'@message':e, '@type':'error'};
 

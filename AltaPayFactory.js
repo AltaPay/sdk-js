@@ -17,6 +17,7 @@ AltaPayFactory.prototype.getMerchantApi = function(username, password, url) {
 		, this.getXml()
 		, this.getResponseFactory()
 		, this.getBase64()
+		, this.getBaseApi()
 	);
 };
 
@@ -31,6 +32,10 @@ AltaPayFactory.prototype.getProcessorApi = function(username, password, url) {
 		, this
 		, this.getLogger()
 		, this.getHttp()
+		, this.getXml()
+		, this.getResponseFactory()
+		, this.getBase64()
+		, this.getBaseApi()
 	);
 };
 
@@ -40,6 +45,14 @@ AltaPayFactory.prototype.getProcessorApi = function(username, password, url) {
 AltaPayFactory.prototype.getLogger = function() {
 	return new Logger();
 };
+
+/**
+ * @returns {BaseApi}
+ */
+AltaPayFactory.prototype.getBaseApi = function() {
+	return new BaseApi();
+};
+
 
 /**
  * @returns {Http}
@@ -68,6 +81,21 @@ AltaPayFactory.prototype.getPaymentRequestBase = function() {
 AltaPayFactory.prototype.getPaymentRequest = function() {
 	return new PaymentRequest(this.getPaymentRequestBase(), this.getCustomerInfo());
 };
+
+/**
+ * @returns {InitiatePaymentRequest}
+ */
+AltaPayFactory.prototype.getInitiatePaymentRequest = function() {
+	return new InitiatePaymentRequest(this.getPaymentRequestBase(), this.getCustomerInfo(), this.getCreditCard());
+};
+
+/**
+ * @returns {CreditCard}
+ */
+AltaPayFactory.prototype.getCreditCard = function() {
+	return new CreditCard();
+};
+
 
 /**
  * @returns {CustomerInfo}
