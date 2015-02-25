@@ -17,6 +17,17 @@ var Assert = {
 			throw message;
 		}
 	}
+	,objectEquals : function(expected, actual, message)
+	{
+		if(message == null)
+		{
+			message = "'"+expected+"' was unexpectedly different from: '"+actual+"'";
+		}
+		if(!AltaPayMatchers.objectEquals(expected).matches(actual))
+		{
+			throw message;
+		}
+	}
 };
 
 function UnitTestAltaPayFactory()
