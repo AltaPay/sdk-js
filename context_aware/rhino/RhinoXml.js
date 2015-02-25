@@ -78,6 +78,12 @@ RhinoXml.prototype.traverseXmlDom = function(element) {
 	var result = {};
 //	console.log(element.getTagName()+ "("+childNodes.getLength()+")");
 
+	if(childNodes.getLength() == 0 &&
+		(element.getAttributes() == null || element.getAttributes().getLength() == 0))
+	{
+		return null;
+	}
+
 	if(element.getAttributes() != null)
 	{
 		var attributes = element.getAttributes();
@@ -86,11 +92,6 @@ RhinoXml.prototype.traverseXmlDom = function(element) {
 			var attribute = attributes.item(a);
 			result['@'+attribute.getName()] = attribute.getTextContent();
 		}
-	}
-
-	if(childNodes.getLength() == 0)
-	{
-		return null;
 	}
 
 	for(var i = 0;i < childNodes.getLength();i++)
