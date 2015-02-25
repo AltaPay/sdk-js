@@ -43,5 +43,20 @@ var SubscriptionTests = {
 		Assert.equals(authResponse.getPaymentId(), response.getSubscriptionPayment().getPaymentId());
 		Assert.equals(8, response.getChargePayment().getCapturedAmount());
 		Assert.equals('my reconciliation identifier', response.getChargePayment().getReconciliationIdentifier());
+	},
+
+	reserveSubscriptionCharge : function()
+	{
+		var request = factory.getChargeRequest();
+		request.subscriptionPaymentId = authResponse.getPaymentId();
+		request.amount = 8;
+
+		var response = mapi.reserveSubscriptionCharge(request);
+
+		Assert.equals(true, response.success(), "Error: "+response.getErrorMessage());
+		Assert.equals(10, response.getSubscriptionPayment().getRecurringDefaultAmount());
+		Assert.equals(authResponse.getPaymentId(), response.getSubscriptionPayment().getPaymentId());
+		Assert.equals(8, response.getChargePayment().getReservedAmount());
+		Assert.equals(0, response.getChargePayment().getCapturedAmount());
 	}
 };
