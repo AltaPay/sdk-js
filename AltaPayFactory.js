@@ -210,3 +210,10 @@ AltaPayFactory.prototype.getPaymentsRequest = function() {
 	return new PaymentsRequest(this.getBaseRequest());
 }
 
+/**
+ * @returns {FundingsRequest}
+ */
+AltaPayFactory.prototype.getFundingsRequest = function() {
+	return new FundingsRequest(this.getBaseRequest());
+}
+
