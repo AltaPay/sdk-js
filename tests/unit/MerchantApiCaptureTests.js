@@ -1,9 +1,4 @@
 
-
-
-
-
-
 var factory;
 var logger;
 var http;
