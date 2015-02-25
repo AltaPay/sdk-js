@@ -108,6 +108,50 @@ var CaptureResponseTests = {
 		var registeredAddress = captureResponse.getRegisteredAddress();
 
 		Assert.equals(null,registeredAddress);
+	},
+
+	getCapturedAmount : function()
+	{
+		var captureResponse = new CaptureResponse(
+			{Body:{Transactions:{Transaction:{
+				CapturedAmount : '101.00'
+			}}}}
+		);
+
+		Assert.equals(101.00,captureResponse.getCapturedAmount());
+	},
+
+	getReservedAmount : function()
+	{
+		var captureResponse = new CaptureResponse(
+			{Body:{Transactions:{Transaction:{
+				ReservedAmount : '101.00'
+			}}}}
+		);
+
+		Assert.equals(101.00,captureResponse.getReservedAmount());
+	},
+
+	getRefundedAmount : function()
+	{
+		var captureResponse = new CaptureResponse(
+			{Body:{Transactions:{Transaction:{
+				RefundedAmount : '101.00'
+			}}}}
+		);
+
+		Assert.equals(101.00,captureResponse.getRefundedAmount());
+	},
+
+	getRecurringDefaultAmount : function()
+	{
+		var captureResponse = new CaptureResponse(
+			{Body:{Transactions:{Transaction:{
+				RecurringDefaultAmount : '101.00'
+			}}}}
+		);
+
+		Assert.equals(101.00,captureResponse.getRecurringDefaultAmount());
 	}
 
 

@@ -90,6 +90,29 @@ AltaPayFactory.prototype.getInitiatePaymentRequest = function() {
 };
 
 /**
+ * @returns {CaptureRequest}
+ */
+AltaPayFactory.prototype.getCaptureRequest = function() {
+	return new CaptureRequest(this.getBaseRequest());
+};
+
+/**
+ * @returns {RefundRequest}
+ */
+AltaPayFactory.prototype.getRefundRequest = function() {
+	return new RefundRequest(this.getBaseRequest());
+};
+
+
+/**
+ * @returns {ReleaseRequest}
+ */
+AltaPayFactory.prototype.getReleaseRequest = function() {
+	return new ReleaseRequest(this.getBaseRequest());
+};
+
+
+/**
  * @returns {CreditCard}
  */
 AltaPayFactory.prototype.getCreditCard = function() {
