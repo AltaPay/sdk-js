@@ -19,6 +19,16 @@ var Assert = {
 	}
 };
 
+function UnitTestAltaPayFactory()
+{
+	ObjectHelper.extend(this, new AltaPayFactory());
+}
+
+UnitTestAltaPayFactory.prototype.getHttp = function()
+{
+	return JsMockito.mock(Http);
+}
+
 var AltaPayMatchers = {
 
 	objectEquals : function(expected)
