@@ -86,7 +86,7 @@ AltaPayFactory.prototype.getPaymentRequest = function() {
  * @returns {InitiatePaymentRequest}
  */
 AltaPayFactory.prototype.getInitiatePaymentRequest = function() {
-	return new InitiatePaymentRequest(this.getPaymentRequestBase(), this.getCustomerInfo(), this.getCreditCard());
+	return new InitiatePaymentRequest(this.getBaseRequest(),this.getPaymentRequestBase(), this.getCustomerInfo(), this.getCreditCard());
 };
 
 /**
@@ -101,6 +101,13 @@ AltaPayFactory.prototype.getCreditCard = function() {
  */
 AltaPayFactory.prototype.getBaseRequest = function() {
 	return new BaseRequest();
+};
+
+/**
+ * @returns {OrderLine}
+ */
+AltaPayFactory.prototype.getOrderLine = function() {
+	return new OrderLine(this.getBaseRequest());
 };
 
 /**

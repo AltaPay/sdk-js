@@ -10,7 +10,7 @@ var ProcessorApi_InitiatePayment = {
 		papi = factory.getProcessorApi('shop api', 'testpassword', 'http://gateway.dev.pensio.com');
 	},
 
-	initiatePayment_ : function()
+	initiatePayment_simple : function()
 	{
 		var request = factory.getInitiatePaymentRequest();
 
@@ -26,6 +26,36 @@ var ProcessorApi_InitiatePayment = {
 		var response = papi.initiatePayment(request);
 
 		Assert.equals(true, response.success());
+	},
+
+	initiatePayment_withOrderLines : function()
+	{
+		var request = factory.getInitiatePaymentRequest();
+
+		request.amount = 30.30;
+		request.terminal = 'AltaPay Test Terminal';
+		request.currency = 'EUR';
+		request.creditCard.cardnum = '4561234561234561';
+		request.creditCard.emonth = '11';
+		request.creditCard.eyear = '2020';
+		request.creditCard.cvc = '123';
+		request.shopOrderid = 'InitiatePayment_'+(new Date()).getTime();
+		var line1 = factory.getOrderLine();
+		line1.itemId = 'item #1';
+		line1.description = 'A blue boat';
+		line1.unitPrice = 10.10;
+		line1.quantity = 3;
+		line1.taxAmount = 4;
+		line1.unitCode = 'kg';
+		line1.discountPercent = 10;
+		line1.imageUrl = 'http://url';
+		request.addOrderLine(line1);
+
+		var response = papi.initiatePayment(request);
+
+		Assert.equals(true, response.success());
 	}
+
+
 
 };
