@@ -49,6 +49,50 @@ var InitiatePaymentResponseTests = {
 		var response = new InitiatePaymentResponse({Header:{}});
 
 		Assert.equals(FraudRecommendation.Unknown,response.getFraudRecommendation());
+	},
+
+	getPaymentId_exists : function()
+	{
+		var response = new InitiatePaymentResponse({Body:{Transactions:{Transaction:{PaymentId:'the id'}}}});
+
+		Assert.equals('the id',response.getPaymentId());
+	},
+
+	getPaymentId_paymentDoesntExist : function()
+	{
+		var response = new InitiatePaymentResponse({Header:{}, Body:{}});
+
+		Assert.equals(null,response.getPaymentId());
+	},
+
+	getPaymentId_bodyDoesntExist : function()
+	{
+		var response = new InitiatePaymentResponse({Header:{}});
+
+		Assert.equals(null,response.getPaymentId());
+	},
+
+	getTransactionId_exists : function()
+	{
+		var response = new InitiatePaymentResponse({Body:{Transactions:{Transaction:{TransactionId:546}}}});
+
+		Assert.equals(546,response.getTransactionId());
+	},
+
+	getTransactionId_paymentDoesntExist : function()
+	{
+		var response = new InitiatePaymentResponse({Header:{}, Body:{}});
+
+		Assert.equals(null,response.getTransactionId());
+	},
+
+	getTransactionId_bodyDoesntExist : function()
+	{
+		var response = new InitiatePaymentResponse({Header:{}});
+
+		Assert.equals(null,response.getTransactionId());
 	}
+
+
 
 }

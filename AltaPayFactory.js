@@ -139,6 +139,13 @@ AltaPayFactory.prototype.getPaymentRequestConfig = function() {
 };
 
 /**
+ * @returns {Verify3dSecureRequest}
+ */
+AltaPayFactory.prototype.getVerify3dSecureRequest = function() {
+	return new Verify3dSecureRequest(this.getBaseRequest());
+};
+
+/**
  * @returns {DateHelper}
  */
 AltaPayFactory.prototype.getDateHelper = function() {

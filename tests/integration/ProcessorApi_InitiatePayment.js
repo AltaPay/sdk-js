@@ -161,6 +161,34 @@ var ProcessorApi_InitiatePayment = {
 
 		Assert.equals(true, response.success(), "Error: "+response.getErrorMessage());
 		Assert.equals(FraudRecommendation.Accept, response.getFraudRecommendation());
+	},
+
+	initiatePayment_3dSecureFlow : function()
+	{
+		var request = factory.getInitiatePaymentRequest();
+
+		request.amount = 5.68;
+		request.terminal = 'AltaPay Test 3DSecure Terminal';
+		request.currency = 'EUR';
+		request.creditCard.cardnum = '4111111111111111';
+		request.creditCard.emonth = '11';
+		request.creditCard.eyear = '2020';
+		request.creditCard.cvc = '123';
+		request.shopOrderid = 'InitiatePayment_'+(new Date()).getTime();
+
+		var response = papi.initiatePayment(request);
+
+		Assert.equals(true, response.threeDSecure(), "Error: "+response.getErrorMessage());
+		Assert.equals('testbank', response.getRedirectUrl().match(/testbank/));
+		Assert.equals('WorkingPaReq', response.getPaReq());
+
+		var verifyRequest = factory.getVerify3dSecureRequest();
+		verifyRequest.paymentId = response.getTransactionId();
+		verifyRequest.paRes = 'WorkingPaRes';
+
+		var verifyResponse = papi.verify3dSecure(verifyRequest);
+
+		Assert.equals(true, verifyResponse.success(), "Error: "+response.getErrorMessage());
 	}
 
 

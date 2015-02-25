@@ -41,6 +41,13 @@ var HttpHelperTests = {
 		Assert.equals('value2', actual['element1[sub1][1]']);
 	},
 
+	getHttpHash_withJavaString : function()
+	{
+		var actual = httpHelper.getHttpHash({element1:new java.lang.String('value1')});
+
+		Assert.equals('value1', actual['element1']);
+	},
+
 	buildParameterString_simple : function()
 	{
 		var actual = httpHelper.buildParameterString({element1:'value1',element2:'value2'});
