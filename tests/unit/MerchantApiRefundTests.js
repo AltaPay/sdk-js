@@ -23,7 +23,7 @@ var MerchantApiRefundTests = {
 		responseFactory = JsMockito.mock(ResponseFactory);
 		base64 = new Base64();
 
-		api = new MerchantApi('username','password','url',factory, logger, http, dateHelper, xml,responseFactory, base64);
+		api = new MerchantApi('username','password','url',factory, logger, http, dateHelper, xml,responseFactory, base64, new BaseApi());
 	},
 
 	callHttpWithAuthorisationParameters : function()
