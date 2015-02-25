@@ -12,6 +12,7 @@ var xml;
 var responseFactory;
 var request;
 var base64;
+var testFactory;
 
 var api;
 
@@ -22,12 +23,13 @@ var MerchantApiCaptureTests = {
 
 	setup :function ()
 	{
+		testFactory = new UnitTestAltaPayFactory();
 		factory = JsMockito.mock(AltaPayFactory);
 		logger = JsMockito.mock(Logger);
 		http = JsMockito.mock(Http);
 		dateHelper = JsMockito.mock(DateHelper);
 		xml = JsMockito.mock(Xml);
-		request = JsMockito.mock(CaptureRequest);
+		request = JsMockito.mock(testFactory.getCaptureRequest());
 		responseFactory = JsMockito.mock(ResponseFactory);
 		base64 = new Base64();
 

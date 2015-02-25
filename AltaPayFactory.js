@@ -111,6 +111,13 @@ AltaPayFactory.prototype.getReleaseRequest = function() {
 	return new ReleaseRequest(this.getBaseRequest());
 };
 
+/**
+ * @returns {ChargeRequest}
+ */
+AltaPayFactory.prototype.getChargeRequest = function() {
+	return new ChargeRequest(this.getBaseRequest());
+};
+
 
 /**
  * @returns {CreditCard}

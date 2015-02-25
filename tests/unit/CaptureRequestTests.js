@@ -1,17 +1,20 @@
 
 var orderLine;
 var orderLine2;
+var factory;
 
 var CaptureRequestTests = {
 	setup : function()
 	{
-		orderLine = JsMockito.mock(new OrderLine(new BaseRequest()));
-		orderLine2 = JsMockito.mock(new OrderLine(new BaseRequest()));
+		factory = new UnitTestAltaPayFactory();
+
+		orderLine = JsMockito.mock(factory.getOrderLine());
+		orderLine2 = JsMockito.mock(factory.getOrderLine());
 	},
 
 	toHash_tranformPaymentId : function()
 	{
-		var request = new CaptureRequest();
+		var request = factory.getCaptureRequest();
 		request.paymentId = 234;
 
 		var actual = request.toHash();
@@ -21,7 +24,7 @@ var CaptureRequestTests = {
 
 	toHash_tranformOtherNonOrderLineFields : function()
 	{
-		var request = new CaptureRequest();
+		var request = factory.getCaptureRequest();
 		request.amount = 344.56;
 		request.reconciliationIdentifier = 'identifier';
 		request.invoiceNumber = 'invoice no#';
@@ -37,7 +40,7 @@ var CaptureRequestTests = {
 
 	toHash_tranformOrderLines : function()
 	{
-		var request = new CaptureRequest();
+		var request = factory.getCaptureRequest();
 
 		request.addOrderLine(orderLine);
 		var orderLineHash = {itemId:'item id#'};
@@ -56,7 +59,7 @@ var CaptureRequestTests = {
 
 	toHash_doNotTranformOrderLines_whenThereAreNone : function()
 	{
-		var request = new CaptureRequest();
+		var request = factory.getCaptureRequest();
 
 		var actual = request.toHash();
 
@@ -65,7 +68,7 @@ var CaptureRequestTests = {
 
 	toHash_doesNotSetFunctionsOnHash : function()
 	{
-		var request = new CaptureRequest();
+		var request = factory.getCaptureRequest();
 
 		var actual = request.toHash();
 

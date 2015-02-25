@@ -1,18 +1,21 @@
 
 var orderLine;
 var orderLine2;
+var factory;
 
 var RefundRequestTests = {
 
 	setup : function()
 	{
-		orderLine = JsMockito.mock(new OrderLine(new BaseRequest()));
-		orderLine2 = JsMockito.mock(new OrderLine(new BaseRequest()));
+		factory = new UnitTestAltaPayFactory();
+
+		orderLine = JsMockito.mock(factory.getOrderLine());
+		orderLine2 = JsMockito.mock(factory.getOrderLine());
 	},
 
 	toHash_tranformPaymentId : function()
 	{
-		var request = new RefundRequest();
+		var request = factory.getRefundRequest();
 		request.paymentId = 234;
 
 		var actual = request.toHash();
@@ -22,7 +25,7 @@ var RefundRequestTests = {
 
 	toHash_tranformOtherNonOrderLineFields : function()
 	{
-		var request = new RefundRequest();
+		var request = factory.getRefundRequest();
 		request.amount = 344.56;
 		request.reconciliationIdentifier = 'identifier';
 		request.invoiceNumber = 'invoice no#';
@@ -38,7 +41,7 @@ var RefundRequestTests = {
 
 	toHash_tranformOrderLines : function()
 	{
-		var request = new RefundRequest();
+		var request = factory.getRefundRequest();
 
 		request.addOrderLine(orderLine);
 		var orderLineHash = {itemId:'item id#'};
@@ -57,7 +60,7 @@ var RefundRequestTests = {
 
 	toHash_doNotTranformOrderLines_whenThereAreNone : function()
 	{
-		var request = new RefundRequest();
+		var request = factory.getRefundRequest();
 
 		var actual = request.toHash();
 
@@ -66,7 +69,7 @@ var RefundRequestTests = {
 
 	toHash_doesNotSetFunctionsOnHash : function()
 	{
-		var request = new RefundRequest();
+		var request = factory.getRefundRequest();
 
 		var actual = request.toHash();
 
