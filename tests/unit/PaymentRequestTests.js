@@ -3,6 +3,7 @@ var factory;
 var request;
 
 var PaymentRequestTests = {
+
 	setup: function () {
 		factory = new UnitTestAltaPayFactory();
 		request = factory.getPaymentRequest();
@@ -18,6 +19,11 @@ var PaymentRequestTests = {
 
 		Assert.equals("item id", actual.orderLines[0].itemId);
 		Assert.equals("description", actual.orderLines[0].description);
+	},
+	toHash_orderLinesEmpty: function () {
+		var actual = request.toHash();
+
+		Assert.equals(null, actual.orderLines);
 	},
 	transformHashKey_paymentInfos: function(){
 		var actual = request.transformHashKey('paymentInfos');
