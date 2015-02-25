@@ -202,3 +202,11 @@ AltaPayFactory.prototype.getBase64 = function () {
 AltaPayFactory.prototype.getHttpHelper = function() {
 	return new HttpHelper();
 }
+
+/**
+ * @returns {PaymentsRequest}
+ */
+AltaPayFactory.prototype.getPaymentsRequest = function() {
+	return new PaymentsRequest(this.getBaseRequest());
+}
+
