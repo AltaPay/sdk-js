@@ -4,7 +4,11 @@
  * @constructor
  */
 function RhinoXml() {
-
+	this.nodeTypes = {
+		Text : 3,
+		CData : 4,
+		Tag : 1
+	};
 }
 
 /**
@@ -98,7 +102,7 @@ RhinoXml.prototype.traverseXmlDom = function(element) {
 	{
 		var childNode = childNodes.item(i);
 
-		if(childNode.getNodeType() == 3 || childNode.getNodeType() == 4)
+		if(childNode.getNodeType() == this.nodeTypes.Text || childNode.getNodeType() == this.nodeTypes.CData)
 		{
 			if(Object.keys(result).length > 0)
 			{
@@ -110,7 +114,7 @@ RhinoXml.prototype.traverseXmlDom = function(element) {
 			}
 
 		}
-		else if(childNode.getNodeType() == 1)
+		else if(childNode.getNodeType() == this.nodeTypes.Tag)
 		{
 			if(result[childNode.getTagName()])
 			{
