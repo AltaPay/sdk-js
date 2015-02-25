@@ -6,8 +6,8 @@ var RefundRequestTests = {
 
 	setup : function()
 	{
-		orderLine = JsMockito.mock(OrderLine);
-		orderLine2 = JsMockito.mock(OrderLine);
+		orderLine = JsMockito.mock(new OrderLine(new BaseRequest()));
+		orderLine2 = JsMockito.mock(new OrderLine(new BaseRequest()));
 	},
 
 	toHash_tranformPaymentId : function()
