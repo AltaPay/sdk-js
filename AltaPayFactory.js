@@ -93,9 +93,15 @@ AltaPayFactory.prototype.getInitiatePaymentRequest = function() {
  * @returns {CreditCard}
  */
 AltaPayFactory.prototype.getCreditCard = function() {
-	return new CreditCard();
+	return new CreditCard(this.getBaseRequest());
 };
 
+/**
+ * @returns {BaseRequest}
+ */
+AltaPayFactory.prototype.getBaseRequest = function() {
+	return new BaseRequest();
+};
 
 /**
  * @returns {CustomerInfo}

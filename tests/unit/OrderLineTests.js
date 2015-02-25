@@ -3,7 +3,7 @@ var OrderLineTests = {
 
 	toHash : function()
 	{
-		var line = new OrderLine();
+		var line = new OrderLine(new BaseRequest());
 		line.itemId = 'item id#';
 		line.description = 'description';
 		line.unitPrice = 34.54;
