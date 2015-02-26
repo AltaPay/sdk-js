@@ -1,11 +1,17 @@
 
+var factory;
+var mapi;
+
 var CreatePaymentRequestTests = {
+	setup : function()
+	{
+		factory = new RhinoAltaPayFactory(new AltaPayFactory());
+
+		mapi = factory.getMerchantApi('shop api', 'testpassword', 'http://gateway.dev.pensio.com');
+	},
+
 	simple : function()
 	{
-		var factory = new RhinoAltaPayFactory(new AltaPayFactory());
-
-		var mapi = factory.getMerchantApi('shop api', 'testpassword', 'http://gateway.dev.pensio.com');
-
 		var request = factory.getPaymentRequest();
 		request.terminal = 'AltaPay Soap Test Terminal';
 		request.shopOrderid = 'CreatePaymentRequestSimple_'+(new Date()).getTime();
@@ -18,10 +24,6 @@ var CreatePaymentRequestTests = {
 
 	allParameters : function()
 	{
-		var factory = new RhinoAltaPayFactory(new AltaPayFactory());
-
-		var mapi = factory.getMerchantApi('shop api', 'testpassword', 'http://gateway4.rolandas.earth.pensio.com');
-
 		var request = factory.getPaymentRequest();
 		//PaymentRequestBase
 		request.terminal = 'AltaPay Soap Test Terminal';
@@ -33,7 +35,7 @@ var CreatePaymentRequestTests = {
 		request.authType = 'payment';
 		request.creditCardToken = 'creditCardToken';
 		request.cookie = 'mycookievalue';
-		request.fraudService = 'red';
+		request.fraudService = 'test';
 
 		//PaymentRequest
 		request.saleReconciliationIdentifier = '74818181818';
@@ -41,7 +43,7 @@ var CreatePaymentRequestTests = {
 		request.salesTax = '1.00';
 		request.customerCreatedDate = new Date('2015', '02', '28', '10', '10', '10');
 
-		var orderLine = AltaPayFactory.prototype.getOrderLine();
+		var orderLine = factory.getOrderLine();
 		orderLine.description = 'description';
 		orderLine.itemId = '222';
 		orderLine.quantity = '1';
@@ -55,10 +57,31 @@ var CreatePaymentRequestTests = {
 		request.organisationNumber = '123123123';
 		request.accountOffer = 'required';
 
+		request.customerInfo.email = 'my@e.mail';
+		request.customerInfo.username = 'username';
+		request.customerInfo.customerPhone = 'phone';
+		request.customerInfo.bankName = 'bank name';
+		request.customerInfo.bankPhone = 'bank phone';
+		request.customerInfo.billingAddress.firstName = 'billing first name';
+		request.customerInfo.billingAddress.lastName = 'billing last name';
+		request.customerInfo.billingAddress.address = 'billing address';
+		request.customerInfo.billingAddress.city = 'billing city';
+		request.customerInfo.billingAddress.region = 'billing region';
+		request.customerInfo.billingAddress.postalCode = 'billing postal';
+		request.customerInfo.billingAddress.country = 'DK';
+		request.customerInfo.shippingAddress.firstName = 'shipping first name';
+		request.customerInfo.shippingAddress.lastName = 'shipping last name';
+		request.customerInfo.shippingAddress.address = 'shipping address';
+		request.customerInfo.shippingAddress.city = 'shipping city';
+		request.customerInfo.shippingAddress.region = 'shipping region';
+		request.customerInfo.shippingAddress.postalCode = 'shipping postal';
+		request.customerInfo.shippingAddress.country = 'DK';
+
 		var response = mapi.createPaymentRequest(request);
 
-		console.logObject(response.getResponseObject());
 		Assert.equals(true, response.success(), "Error: "+response.getErrorMessage());
+
+		Assert.equals(true, response.getUrl().contains("://gateway.dev.pensio.com"), "Url was: "+response.getUrl() );
 	}
 }
 
