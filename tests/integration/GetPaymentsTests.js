@@ -30,6 +30,7 @@ var GetPaymentsTests = {
 
 	getPayments : function()
 	{
+		// We sleep for 3 seconds, to ensure the reporting database (from which this information is fetched) is populated.
 		java.lang.Thread.sleep(3000);
 
 		var request = factory.getPaymentsRequest();
