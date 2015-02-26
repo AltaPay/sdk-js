@@ -28,11 +28,11 @@ var MerchantApiRefundTests = {
 		api = new MerchantApi('username','password','url',factory, logger, http, dateHelper, xml,responseFactory, base64, new BaseApi());
 	},
 
-	callHttpWithAuthorisationParameters : function()
+	callHttpWithHeadersSet : function()
 	{
 		api.refund(request);
 
-		JsMockito.verify(http).post(JsHamcrest.Matchers.anything(), JsHamcrest.Matchers.anything(), AltaPayMatchers.objectEquals({'Authorization':'Basic dXNlcm5hbWU6cGFzc3dvcmQ='}));
+		JsMockito.verify(http).post(JsHamcrest.Matchers.anything(), JsHamcrest.Matchers.anything(), AltaPayMatchers.objectEquals({'Authorization':'Basic dXNlcm5hbWU6cGFzc3dvcmQ=','x-altapay-client-version':JssdkVersion.VERSION}));
 	},
 
 	callHttpWithCorrectParameters : function()
