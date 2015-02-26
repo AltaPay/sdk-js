@@ -35,6 +35,37 @@ var PaymentRequestResponseTests = {
 		Assert.equals('Some message', paymentRequestResponse.getErrorMessage());
 	},
 
+	getErrorMessage_fromBody : function()
+	{
+		var paymentRequestResponse = new PaymentRequestResponse({
+			Header:{
+				ErrorCode:0,
+				ErrorMessage:null
+			},
+			Body:{
+				Result:'Error',
+				MerchantErrorMessage:'some merchant error message'
+			}
+		});
+
+		Assert.equals('some merchant error message', paymentRequestResponse.getErrorMessage());
+	},
+
+	getErrorMessage_noError : function()
+	{
+		var paymentRequestResponse = new PaymentRequestResponse({
+			Header:{
+				ErrorCode:0,
+				ErrorMessage:null
+			},
+			Body:{
+				Result:'Success'
+			}
+		});
+
+		Assert.equals(null, paymentRequestResponse.getErrorMessage());
+	},
+
 	getUrl_ifNoError_returnUrl : function()
 	{
 		var paymentRequestResponse = new PaymentRequestResponse({
