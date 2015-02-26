@@ -1,0 +1,49 @@
+<project name="JsSdk" default="RhinoBuild">
+
+    <target name="-CleanOutputDir">
+        <echo taskname="${ant.project.name}">Clean output directory: output</echo>
+        <delete dir="output" />
+        <mkdir dir="output" />
+    </target>
+
+    <target name="-LoadAntContrib" unless="ant-contrib-already-loaded">
+        <taskdef resource="net/sf/antcontrib/antlib.xml" id="">
+            <classpath>
+                <pathelement location="ant-contrib-1.0b3.jar"/>
+            </classpath>
+        </taskdef>
+    </target>
+
+    <target name="RhinoBuild" depends="-LoadAntContrib,-CleanOutputDir">
+
+        <antcall target="includeDir">
+            <param name="dir" value="lib"/>
+        </antcall>
+
+        <antcall target="includeDir">
+            <param name="dir" value="context_aware/rhino"/>
+        </antcall>
+
+        <antcall target="writeToOutputFile">
+            <param name="theFile" value="AltaPayFactory.js"/>
+        </antcall>
+
+        <move file="output/out.js" tofile="output/rhino.js" />
+
+    </target>
+
+    <target name="includeDir">
+
+        <foreach target="writeToOutputFile" param="theFile">
+            <fileset dir="${dir}" casesensitive="yes">
+                <include name="**/*.js"/>
+            </fileset>
+        </foreach>
+
+    </target>
+
+    <target name="writeToOutputFile">
+        <loadfile property="fileContents" srcFile="${theFile}" />
+        <echo message="${fileContents}" output="output/out.js" append="true"/>
+    </target>
+</project>
