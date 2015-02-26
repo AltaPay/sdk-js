@@ -22,7 +22,7 @@
 
     <target name="-AltaPayReleaseNumber">
         <tstamp>
-            <format property="altapay.release" pattern="yyyyMMdd" locale="en,GB"/>
+            <format property="altapay.release" pattern="yyyyMMdd_hhmmss" locale="en,GB"/>
         </tstamp>
     </target>
 
