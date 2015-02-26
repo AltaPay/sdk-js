@@ -1,12 +1,16 @@
 
 var testFactory;
 var merchantApi;
+var responseFactory;
 
 var FundingsResponseTests = {
 
 	setup : function()
 	{
 		testFactory = new UnitTestAltaPayFactory();
+		responseFactory = JsMockito.mock(ResponseFactory);
+
+		JsMockito.when(responseFactory).getFundingRecord(JsHamcrest.Matchers.anything()).then(function(data){ return new FundingRecord(data) });
 
 		merchantApi = JsMockito.mock(MerchantApi);
 	},
@@ -19,7 +23,7 @@ var FundingsResponseTests = {
 			'2010-12-24;payment;FunctionalTestContractID-record1;my-reconciliation-identifier;1;fixture-shop-order-id;"AltaPay Test Terminal";"AltaPay Functional Test Shop";EUR;0.00;;EUR;0.00;0.00;0.00;0.00;0.00'+"\n"
 		);
 
-		var record = new FundingResponse({}, merchantApi);
+		var record = new FundingResponse({}, merchantApi, responseFactory);
 
 		var records = record.getFundingRecords();
 
