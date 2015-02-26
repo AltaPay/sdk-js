@@ -1,9 +1,15 @@
 <project name="JsSdk" default="RhinoBuild">
 
+    <property name="outputdirs" value="build,output" />
+
+    <target name="Clean" depends="-LoadAntContrib">
+        <foreach target="-CleanOutputDir" list="${outputdirs}" param="outputdir" />
+    </target>
+
     <target name="-CleanOutputDir">
-        <echo taskname="${ant.project.name}">Clean output directory: output</echo>
-        <delete dir="output" />
-        <mkdir dir="output" />
+        <echo taskname="${ant.project.name}">Clean output directory: ${outputdir}</echo>
+        <delete dir="${outputdir}" />
+        <mkdir dir="${outputdir}" />
     </target>
 
     <target name="-LoadAntContrib" unless="ant-contrib-already-loaded">
@@ -14,22 +20,54 @@
         </taskdef>
     </target>
 
-    <target name="RhinoBuild" depends="-LoadAntContrib,-CleanOutputDir">
+    <target name="-AltaPayReleaseNumber">
+        <tstamp>
+            <format property="altapay.release" pattern="yyyyMMdd" locale="en,GB"/>
+        </tstamp>
+    </target>
 
-        <antcall target="includeDir">
+    <target name="RhinoBuild" depends="-LoadAntContrib,Clean,-AltaPayReleaseNumber">
+
+        <antcall target="copyDirToBuild">
             <param name="dir" value="lib"/>
         </antcall>
 
-        <antcall target="includeDir">
+        <antcall target="copyDirToBuild">
             <param name="dir" value="context_aware/rhino"/>
         </antcall>
 
-        <antcall target="writeToOutputFile">
+        <antcall target="copyFile">
             <param name="theFile" value="AltaPayFactory.js"/>
         </antcall>
 
-        <move file="output/out.js" tofile="output/rhino.js" />
+        <echo output="build/JssdkVersion.js" append="false">
+            JssdkVersion = {
+            VERSION : '${altapay.release}'
+            }
+        </echo>
 
+        <antcall target="includeDir">
+            <param name="dir" value="build"/>
+        </antcall>
+
+
+
+        <move file="output/out.js" tofile="output/Rhino-AltaPay-Jssdk-${altapay.release}.js" />
+
+    </target>
+
+    <target name="copyDirToBuild">
+
+        <foreach target="copyFile" param="theFile">
+            <fileset dir="${dir}" casesensitive="yes">
+                <include name="**/*.js"/>
+            </fileset>
+        </foreach>
+
+    </target>
+
+    <target name="copyFile">
+        <copy file="${theFile}" todir="build"/>
     </target>
 
     <target name="includeDir">
