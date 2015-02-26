@@ -13,7 +13,7 @@ var CreatePaymentRequestTests = {
 		request.currency = 'EUR';
 
 		var response = mapi.createPaymentRequest(request);
-		Assert.equals(true, response.success())
+		Assert.equals(true, response.success(), "Error: "+response.getErrorMessage());
 	}
 
 }
