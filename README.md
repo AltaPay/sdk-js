@@ -46,7 +46,7 @@ request.currency = 'EUR';
 // send the request and get the response
 var response = mapi.createPaymentRequest(request);
 
-if (response.sucess()) {
+if (response.success()) {
 	// payment was created
 	var paymentWindowUrl = response.getUrl();
 }
