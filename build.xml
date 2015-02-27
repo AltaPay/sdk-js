@@ -42,7 +42,7 @@
 
         <echo output="build/JssdkVersion.js" append="false">
             JssdkVersion = {
-            VERSION : 'JsSDk/${altapay.release}'
+            VERSION : 'JsSDK/${altapay.release}'
             }
         </echo>
 
