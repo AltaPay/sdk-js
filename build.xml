@@ -1,6 +1,6 @@
 <project name="JsSdk" default="RhinoBuild">
 
-    <property name="outputdirs" value="build,output" />
+    <property name="outputdirs" value="build,output,tests/out" />
 
     <target name="Clean" depends="-LoadAntContrib">
         <foreach target="-CleanOutputDir" list="${outputdirs}" param="outputdir" />
