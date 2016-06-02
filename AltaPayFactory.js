@@ -90,6 +90,13 @@ AltaPayFactory.prototype.getInitiatePaymentRequest = function() {
 };
 
 /**
+ * @returns {InvoiceReservationRequest}
+ */
+AltaPayFactory.prototype.getInvoiceReservationRequest = function() {
+	return new InvoiceReservationRequest(this.getCustomerInfo());
+};
+
+/**
  * @returns {CaptureRequest}
  */
 AltaPayFactory.prototype.getCaptureRequest = function() {
