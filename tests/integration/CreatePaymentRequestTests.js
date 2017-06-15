@@ -27,7 +27,7 @@ var CreatePaymentRequestTests = {
 		var request = factory.getPaymentRequest();
 		//PaymentRequestBase
 		request.terminal = 'AltaPay Soap Test Terminal';
-		request.shop_orderid = 'CreatePaymentRequestSimple_'+(new Date()).getTime();
+		request.shop_orderid = 'CreatePaymentRequestAllParameters_'+(new Date()).getTime();
 		request.amount = '120.15';
 		request.currency = 'EUR';
 
@@ -41,7 +41,7 @@ var CreatePaymentRequestTests = {
 		request.saleReconciliationIdentifier = '74818181818';
 		request.salesInvoiceNumber = '654888818';
 		request.salesTax = '1.00';
-		request.customerCreatedDate = new Date('2015', '02', '28', '10', '10', '10');
+		request.customerCreatedDate = '2015-11-10';
 
 		var orderLine = factory.getOrderLine();
 		orderLine.description = 'description';

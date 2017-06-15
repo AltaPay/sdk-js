@@ -17,7 +17,7 @@ var InvoiceReservationRequestTests = {
 		var request = factory.getInvoiceReservationRequest();
 
 		request.terminal = 'AltaPay Test Invoice Terminal DK';
-		request.shopOrderid = 'InvoiceReservationRequestTest_' + (new Date()).getTime();
+		request.shopOrderid = 'InvoiceReservationTestSimple_' + (new Date()).getTime();
 		request.amount = '123.15';
 		request.currency = 'DKK';
 		request.customerInfo.billingAddress.address = 'billing address';
@@ -26,13 +26,13 @@ var InvoiceReservationRequestTests = {
 
 		var response = mapi.createInvoiceReservation(request);
 
+		Assert.equals(true, response.success(), "Error: " + response.getErrorMessage());
+
 		Assert.equals(request.terminal, response.getPayment(0).responseObject.Terminal, "Terminal doesn't match");
 		Assert.equals(request.shopOrderid, response.getPayment(0).responseObject.ShopOrderId, "ShopOrderId doesn't match");
 		Assert.equals(request.customerInfo.billingAddress.address, response.getPayment(0).responseObject.CustomerInfo.BillingAddress.Address, "Address doesn't match");
 		Assert.equals(request.customerInfo.billingAddress.postalCode, response.getPayment(0).responseObject.CustomerInfo.BillingAddress.PostalCode, "PostalCode doesn't match");
 		Assert.equals(request.customerInfo.email, response.getPayment(0).responseObject.CustomerInfo.Email, "Email doesn't match");
-
-		Assert.equals(true, response.success(), "Error: " + response.getErrorMessage());
 	},
 
 	allParameters : function()
@@ -40,7 +40,7 @@ var InvoiceReservationRequestTests = {
 		var request = factory.getInvoiceReservationRequest();
 
 		request.terminal = 'AltaPay Test Invoice Terminal DK';
-		request.shopOrderid = 'InvoiceReservationRequestTest_' + (new Date()).getTime();
+		request.shopOrderid = 'InvoiceReservationTestAllParams_' + (new Date()).getTime();
 		request.amount = '123.15';
 		request.currency = 'DKK';
 
@@ -48,7 +48,7 @@ var InvoiceReservationRequestTests = {
 		request.transaction_info = ['aaa', 'bbb'];
 		request.accountNumber = '999';
 		request.bankCode = '888';
-		request.fraud_service = '777';
+		request.fraud_service = 'none';
 		request.payment_source = '666';
 		request.organisationNumber = '555';
 		request.personalIdentifyNumber = '444';
@@ -91,6 +91,8 @@ var InvoiceReservationRequestTests = {
 
         var responseObject = response.getPayment(0).responseObject;
 
+		Assert.equals(true, response.success(), "Error: " + response.getErrorMessage());
+
 		Assert.equals(request.terminal, responseObject.Terminal, "Terminal doesn't match");
 		Assert.equals(request.shopOrderid, responseObject.ShopOrderId, "ShopOrderId doesn't match");
 
@@ -118,10 +120,6 @@ var InvoiceReservationRequestTests = {
 		Assert.equals(request.customerInfo.shippingAddress.region, customerInfo.ShippingAddress.Region, "ShippingAddress.Region doesn't match");
 		Assert.equals(request.customerInfo.shippingAddress.postalCode, customerInfo.ShippingAddress.PostalCode, "ShippingAddress.PostalCode doesn't match");
 		Assert.equals(request.customerInfo.shippingAddress.country, customerInfo.ShippingAddress.Country, "ShippingAddress.Country doesn't match");
-
-		Assert.equals(true, response.success(), "Error: " + response.getErrorMessage());
-
-		//Assert.equals(true, response.getUrl().contains("://gateway.dev.pensio.com"), "Url was: " + response.getUrl());
 	}
 }
 

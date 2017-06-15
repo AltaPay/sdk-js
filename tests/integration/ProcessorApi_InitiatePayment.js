@@ -174,7 +174,7 @@ var ProcessorApi_InitiatePayment = {
 		request.creditCard.emonth = '11';
 		request.creditCard.eyear = '2020';
 		request.creditCard.cvc = '123';
-		request.shopOrderid = 'InitiatePayment_'+(new Date()).getTime();
+		request.shopOrderid = 'InitiatePayment3dSecureFlow_'+(new Date()).getTime();
 
 		var response = papi.initiatePayment(request);
 
@@ -182,9 +182,9 @@ var ProcessorApi_InitiatePayment = {
 		Assert.equals('testbank', response.getRedirectUrl().match(/testbank/));
 		Assert.equals('WorkingPaReq', response.getPaReq());
 
-		var verifyRequest = factory.getVerify3dSecureRequest();
-		verifyRequest.paymentId = response.getTransactionId();
-		verifyRequest.paRes = 'WorkingPaRes';
+		var verifyRequest = factory.getVerify3dSecureRequest(response.getTransactionId(), 'WorkingPaRes');
+		//verifyRequest.paymentId = response.getTransactionId();
+		//verifyRequest.paRes = 'WorkingPaRes';
 
 		var verifyResponse = papi.verify3dSecure(verifyRequest);
 

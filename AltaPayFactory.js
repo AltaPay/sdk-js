@@ -178,8 +178,8 @@ AltaPayFactory.prototype.getPaymentRequestConfig = function() {
 /**
  * @returns {Verify3dSecureRequest}
  */
-AltaPayFactory.prototype.getVerify3dSecureRequest = function() {
-	return new Verify3dSecureRequest(this.getBaseRequest());
+AltaPayFactory.prototype.getVerify3dSecureRequest = function(transactionId, paRes) {
+	return new Verify3dSecureRequest(this.getBaseRequest(), transactionId, paRes);
 };
 
 /**
