@@ -55,7 +55,10 @@
             <param name="dir" value="build"/>
         </antcall>
 
-
+        <!-- It's important to copy the SalesForce modules to the end of the file only: -->
+        <antcall target="writeToOutputFile">
+            <param name="theFile" value="salesforce/SalesForceModules.js"/>
+        </antcall>
 
         <move file="output/out.js" tofile="output/Rhino-AltaPay-Jssdk-${altapay.release}.js" />
 
