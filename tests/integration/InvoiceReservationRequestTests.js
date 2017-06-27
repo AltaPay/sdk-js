@@ -7,7 +7,7 @@ var InvoiceReservationRequestTests = {
 	{
 		factory = new RhinoAltaPayFactory(new AltaPayFactory());
 
-		mapi = factory.getMerchantApi('shop api', 'testpassword', 'http://gateway.dev.pensio.com');
+		mapi = factory.getMerchantApi('shop api', 'testpassword', 'http://gateway.dev.earth.pensio.com');
 		//mapi = factory.getMerchantApi('shop api', 'testpassword', 'http://gateway.lb.earth.pensio.com');
 
 	},

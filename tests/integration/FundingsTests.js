@@ -6,7 +6,7 @@ var FundingsTests = {
 	setup : function()
 	{
 		factory = new RhinoAltaPayFactory(new AltaPayFactory());
-		mapi = factory.getMerchantApi('shop api', 'testpassword', 'http://gateway.dev.pensio.com');
+		mapi = factory.getMerchantApi('shop api', 'testpassword', 'http://gateway.dev.earth.pensio.com');
 	},
 
 	getFundings : function()

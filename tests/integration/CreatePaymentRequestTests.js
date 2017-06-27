@@ -7,7 +7,7 @@ var CreatePaymentRequestTests = {
 	{
 		factory = new RhinoAltaPayFactory(new AltaPayFactory());
 
-		mapi = factory.getMerchantApi('shop api', 'testpassword', 'http://gateway.dev.pensio.com');
+		mapi = factory.getMerchantApi('shop api', 'testpassword', 'http://gateway.dev.earth.pensio.com');
 	},
 
 	simple : function()
@@ -81,7 +81,7 @@ var CreatePaymentRequestTests = {
 
 		Assert.equals(true, response.success(), "Error: "+response.getErrorMessage());
 
-		Assert.equals(true, response.getUrl().contains("://gateway.dev.pensio.com"), "Url was: "+response.getUrl() );
+		Assert.equals(true, response.getUrl().contains("://gateway.dev.earth.pensio.com"), "Url was: "+response.getUrl() );
 	}
 }
 
