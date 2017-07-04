@@ -224,3 +224,10 @@ AltaPayFactory.prototype.getFundingsRequest = function() {
 	return new FundingsRequest(this.getBaseRequest());
 }
 
+/**
+ * @returns {UpdateOrderRequest}
+ */
+AltaPayFactory.prototype.getUpdateOrderRequest = function(paymentId, orderLines) {
+	return new UpdateOrderRequest(paymentId, orderLines, this.getBaseRequest());
+};
+
