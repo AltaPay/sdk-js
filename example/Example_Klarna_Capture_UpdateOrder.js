@@ -16,7 +16,7 @@ var mapi = factory.getMerchantApi('shop api', 'testpassword', 'http://gateway.de
 
 // CAPTURE: ======================================================================
 
-var paymentId = "1064"; // PUT A PAYMENT ID FROM A PREVIOUSLY CREATED ORDER HERE
+var paymentId = "3"; // PUT A PAYMENT ID FROM A PREVIOUSLY CREATED ORDER HERE
 
 var request = factory.getCaptureRequest();
 
@@ -24,7 +24,9 @@ request.paymentId = paymentId;
 
 var response = mapi.capture(request);
 
-Assert.equals(true, response.success(), "Error: " + response.getErrorMessage());
+if (!response.success()) {
+    throw new Error ("Error: " + response.getErrorMessage());
+}
 
 
 // UPDATE ORDER: ==================================================================
@@ -49,4 +51,6 @@ var uorequest = factory.getUpdateOrderRequest(paymentId, [ol1, ol2]);
 
 response = mapi.updateOrder(uorequest);
 
-Assert.equals(true, response.success(), "Error: " + response.getErrorMessage());
+if (!response.success()) {
+    throw new Error ("Error: " + response.getErrorMessage());
+}

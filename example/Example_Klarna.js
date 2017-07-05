@@ -57,7 +57,9 @@ request.addOrderLine(ol2);
 
 var response = mapi.createPaymentRequest(request);
 
-Assert.equals(true, response.success(), "Error: " + response.getErrorMessage());
+if (!response.success()) {
+    throw new Error ("Error: " + response.getErrorMessage());
+}
 
 // Access the url below and use the social security number 0801363945 in the page form to complete the Klarna order
 console.log(response.getUrl());
