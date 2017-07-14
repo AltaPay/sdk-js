@@ -28,5 +28,25 @@ var MerchantApiCallbackResponseTests = {
 		Assert.equals(false, response.success());
 		Assert.equals('epayment_cancelled', response.getPayment(0).getTransactionStatus());
 		
+	},
+
+	readReasonCode : function()
+	{
+		var response = api.parseCallbackXml(readFile('./tests/xml/ReasonCode.xml'));
+		Assert.equals('NONE', response.getReasonCode());
+
+	},
+
+	readCardHolderMessage : function()
+	{
+		var response = api.parseCallbackXml(readFile('./tests/xml/CardHolderMessageMustBeShownFalse.xml'));
+
+		Assert.equals('Card Declined', response.getCardHolderErrorMessage());
+		Assert.equals('false', response.getCardHolderMessageMustBeShown());
+
+		response = api.parseCallbackXml(readFile('./tests/xml/CardHolderMessageMustBeShownTrue.xml'));
+
+		Assert.equals('true', response.getCardHolderMessageMustBeShown());
+
 	}
 };
