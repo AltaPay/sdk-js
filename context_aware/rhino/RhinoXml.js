@@ -16,7 +16,7 @@ function RhinoXml() {
  * @param xmlString
  */
 RhinoXml.prototype.deserialize = function(xmlString) {
-	var builder = javax.xml.parsers.DocumentBuilderFactory.newInstance().newDocumentBuilder()
+	var builder = javax.xml.parsers.DocumentBuilderFactory.newInstance().newDocumentBuilder();
 
 	var doc = builder.parse(new org.xml.sax.InputSource(new java.io.StringReader(xmlString)));
 
@@ -24,7 +24,7 @@ RhinoXml.prototype.deserialize = function(xmlString) {
 };
 
 RhinoXml.prototype.serialize = function(rootName,object) {
-	var builder = javax.xml.parsers.DocumentBuilderFactory.newInstance().newDocumentBuilder()
+	var builder = javax.xml.parsers.DocumentBuilderFactory.newInstance().newDocumentBuilder();
 
 	var doc = builder.newDocument();
 
