@@ -43,6 +43,12 @@ var RhinoXmlTests = {
 
 		Assert.equals('the attribute value',anonObject.muh['@attr']);
 	},
+	deserialize_handleNonExistentElement: function()
+	{
+		anonObject = rhinoXml.deserialize('<hat><muh></muh></hat>');
+
+		Assert.equals(null,anonObject.meh);
+	},
 	deserialize_dataAndAttributesOnSameObject: function()
 	{
 		anonObject = rhinoXml.deserialize('<hat><muh attr="the attribute value">the value</muh></hat>');

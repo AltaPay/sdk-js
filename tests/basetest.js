@@ -28,6 +28,12 @@ var Assert = {
 			throw message;
 		}
 	}
+	,assertTrue: function (condition, message)
+	{
+		if (condition != true) {
+			throw "assertTrue failed for " + message;
+		}
+	}
 };
 
 function UnitTestAltaPayFactory()
