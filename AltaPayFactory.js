@@ -97,6 +97,13 @@ AltaPayFactory.prototype.getInvoiceReservationRequest = function() {
 };
 
 /**
+ * @returns {ReservationRequest}
+ */
+AltaPayFactory.prototype.getReservationRequest = function() {
+	return new ReservationRequest(this.getCustomerInfo());
+};
+
+/**
  * @returns {CaptureRequest}
  */
 AltaPayFactory.prototype.getCaptureRequest = function() {
