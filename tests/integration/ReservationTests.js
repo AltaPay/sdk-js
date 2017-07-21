@@ -8,12 +8,14 @@ function createRequest(amount) {
 
     request.terminal = 'AltaPay Soap Test Terminal';
     request.shopOrderid = 'ReservationTest_' + (new Date()).getTime();
-    request.type = AuthType.paymentAndCapture;
     request.amount = amount;
     request.currency = 'DKK';
     request.pan = '4111000011110002';
     request.expiryMonth = 1;
     request.expiryYear = 2018;
+
+    // optional:
+    request.type = AuthType.paymentAndCapture;
     request.cvc = '123';
 
     return request;
@@ -25,10 +27,12 @@ function createRequestWithToken(amount, creditCardToken) {
 
     request.terminal = 'AltaPay Soap Test Terminal';
     request.shopOrderid = 'ReservationTestWithToken_' + (new Date()).getTime();
-    request.type = AuthType.paymentAndCapture;
     request.amount = amount;
     request.currency = 'DKK';
     request.creditCardToken = creditCardToken;
+
+    // optional:
+    request.type = AuthType.paymentAndCapture;
     request.cvc = '123';
 
     return request;
@@ -132,12 +136,19 @@ var ReservationTests = {
 
         var request = createRequest(1.23);
 
-        // TODO ADD ALL THE PARAMETERS
+        request.paymentSource = PaymentSource.mail_order;
+        request.customerCreatedDate = '2018-11-01';
+        request.fraudService = FraudService.test;
+        request.surcharge = 2.5;
+        request.shippingMethod = ShippingMethod.international;
+
+        request.addPaymentInfo('info1', 'desc1');
+        request.addPaymentInfo('info2', 'desc2');
         
         // orderLine:
         var orderLine = factory.getOrderLine();
         orderLine.description = 'description';
-        orderLine.itemId = '222';
+        orderLine.itemId = 'id1';
         orderLine.quantity = '1';
         orderLine.taxPercent = '1.23';
         orderLine.unitCode = '654';
@@ -152,6 +163,7 @@ var ReservationTests = {
         request.customerInfo.customerPhone = 'phone';
         request.customerInfo.bankName = 'bank name';
         request.customerInfo.bankPhone = 'bank phone';
+        request.customerInfo.birthdate = '2001-01-02';
         request.customerInfo.billingAddress.firstName = 'billing first name';
         request.customerInfo.billingAddress.lastName = 'billing last name';
         request.customerInfo.billingAddress.address = 'billing address';
@@ -169,39 +181,54 @@ var ReservationTests = {
 
         var response = mapi.reservation(request);
 
-        var responseObject = response.getPayment(0).responseObject;
-
         Assert.equals(true, response.success(), "Error: " + response.getErrorMessage());
 
-        Assert.equals(request.terminal, responseObject.Terminal, "Terminal doesn't match");
-        Assert.equals(request.shopOrderid, responseObject.ShopOrderId, "ShopOrderId doesn't match");
+        // ordinary parameters:
+        Assert.equals(request.terminal,     response.getPayment(0).responseObject.Terminal,     "Terminal doesn't match");
+        Assert.equals(request.shopOrderid,  response.getPayment(0).responseObject.ShopOrderId,  "ShopOrderId doesn't match");
+        Assert.equals(request.type,         response.getPayment(0).responseObject.AuthType,     "AuthType doesn't match");
+        Assert.equals(request.amount,       response.getPayment(0).getCapturedAmount(),         "CapturedAmount doesn't match");
+        Assert.equals(request.amount,       response.getPayment(0).getReservedAmount(),         "ReservedAmount doesn't match");
+        Assert.equals('411100******0002',   response.getPayment(0).getCreditCardMaskedPan(),    "PAN doesn't match");
+        Assert.equals(request.expiryMonth,  response.getPayment(0).getCreditCardExpiryMonth(),  "ExpiryMonth doesn't match");
+        Assert.equals(request.expiryYear,   response.getPayment(0).getCreditCardExpiryYear(),   "ExpiryYear doesn't match");
 
-        Assert.equals(request.type, responseObject.AuthType, "type doesn't match");
+        Assert.equals('desc1', response.getPaymentInfo('info1'), "PaymentInfo[info1] doesn't match");
+        Assert.equals('desc2', response.getPaymentInfo('info2'), "PaymentInfo[info2] doesn't match");
 
-        Assert.equals(request.transaction_info[0], response.getPayment(0).responseObject.PaymentInfos.PaymentInfo[0]['@'], "PaymentInfo[0] doesn't match");
-        Assert.equals(request.transaction_info[1], response.getPayment(0).responseObject.PaymentInfos.PaymentInfo[1]['@'], "PaymentInfo[1] doesn't match");
+        // customer info:
+        checkCustomerInfo (request.customerInfo, response.getPayment(0).responseObject.CustomerInfo);
 
-        var customerInfo = responseObject.CustomerInfo;
-
-        Assert.equals(request.customerInfo.email, customerInfo.Email, "Email doesn't match");
-        Assert.equals(request.customerInfo.username, customerInfo.Username, "Username doesn't match");
-        Assert.equals(request.customerInfo.customerPhone, customerInfo.CustomerPhone, "CustomerPhone doesn't match");
-        Assert.equals(request.customerInfo.billingAddress.firstName, customerInfo.BillingAddress.Firstname, "BillingAddress.Firstname doesn't match");
-        Assert.equals(request.customerInfo.billingAddress.lastName, customerInfo.BillingAddress.Lastname, "BillingAddress.Lastname doesn't match");
-        Assert.equals(request.customerInfo.billingAddress.address, customerInfo.BillingAddress.Address, "BillingAddress.Address doesn't match");
-        Assert.equals(request.customerInfo.billingAddress.city, customerInfo.BillingAddress.City, "BillingAddress.City doesn't match");
-        Assert.equals(request.customerInfo.billingAddress.region, customerInfo.BillingAddress.Region, "BillingAddress.Region doesn't match");
-        Assert.equals(request.customerInfo.billingAddress.postalCode, customerInfo.BillingAddress.PostalCode, "BillingAddress.PostalCode doesn't match");
-        Assert.equals(request.customerInfo.billingAddress.country, customerInfo.BillingAddress.Country, "BillingAddress.Country doesn't match");
-        Assert.equals(request.customerInfo.shippingAddress.firstName, customerInfo.ShippingAddress.Firstname, "ShippingAddress.Firstname doesn't match");
-        Assert.equals(request.customerInfo.shippingAddress.lastName, customerInfo.ShippingAddress.Lastname, "ShippingAddress.Lastname doesn't match");
-        Assert.equals(request.customerInfo.shippingAddress.address, customerInfo.ShippingAddress.Address, "ShippingAddress.Address doesn't match");
-        Assert.equals(request.customerInfo.shippingAddress.city, customerInfo.ShippingAddress.City, "ShippingAddress.City doesn't match");
-        Assert.equals(request.customerInfo.shippingAddress.region, customerInfo.ShippingAddress.Region, "ShippingAddress.Region doesn't match");
-        Assert.equals(request.customerInfo.shippingAddress.postalCode, customerInfo.ShippingAddress.PostalCode, "ShippingAddress.PostalCode doesn't match");
-        Assert.equals(request.customerInfo.shippingAddress.country, customerInfo.ShippingAddress.Country, "ShippingAddress.Country doesn't match");
     }
 };
 
 
+/**
+ *
+ * @param request {CustomerInfo}
+ * @param response {object}
+ */
+function checkCustomerInfo (request, response) {
 
+    Assert.equals(request.email,                      response.Email,                       "Email doesn't match");
+    Assert.equals(request.username,                   response.Username,                    "Username doesn't match");
+    Assert.equals(request.customerPhone,              response.CustomerPhone,               "CustomerPhone doesn't match");
+    //Assert.equals(request.bankName,                   response.BankName,                    "BankName doesn't match");
+    //Assert.equals(request.bankPhone,                  response.BankPhone,                   "BankPhone doesn't match");
+    //Assert.equals(request.birthdate,                  response.BirthDate,                   "BirthDate doesn't match");
+
+    Assert.equals(request.billingAddress.firstName,   response.BillingAddress.Firstname,    "BillingAddress.Firstname doesn't match");
+    Assert.equals(request.billingAddress.lastName,    response.BillingAddress.Lastname,     "BillingAddress.Lastname doesn't match");
+    Assert.equals(request.billingAddress.address,     response.BillingAddress.Address,      "BillingAddress.Address doesn't match");
+    Assert.equals(request.billingAddress.city,        response.BillingAddress.City,         "BillingAddress.City doesn't match");
+    Assert.equals(request.billingAddress.region,      response.BillingAddress.Region,       "BillingAddress.Region doesn't match");
+    Assert.equals(request.billingAddress.postalCode,  response.BillingAddress.PostalCode,   "BillingAddress.PostalCode doesn't match");
+    Assert.equals(request.billingAddress.country,     response.BillingAddress.Country,      "BillingAddress.Country doesn't match");
+    Assert.equals(request.shippingAddress.firstName,  response.ShippingAddress.Firstname,   "ShippingAddress.Firstname doesn't match");
+    Assert.equals(request.shippingAddress.lastName,   response.ShippingAddress.Lastname,    "ShippingAddress.Lastname doesn't match");
+    Assert.equals(request.shippingAddress.address,    response.ShippingAddress.Address,     "ShippingAddress.Address doesn't match");
+    Assert.equals(request.shippingAddress.city,       response.ShippingAddress.City,        "ShippingAddress.City doesn't match");
+    Assert.equals(request.shippingAddress.region,     response.ShippingAddress.Region,      "ShippingAddress.Region doesn't match");
+    Assert.equals(request.shippingAddress.postalCode, response.ShippingAddress.PostalCode,  "ShippingAddress.PostalCode doesn't match");
+    Assert.equals(request.shippingAddress.country,    response.ShippingAddress.Country,     "ShippingAddress.Country doesn't match");
+}
