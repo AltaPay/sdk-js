@@ -37,6 +37,13 @@ var MerchantApiCallbackResponseTests = {
 
 	},
 
+	readPaymentId : function()
+	{
+		var response = api.parseCallbackXml(readFile('./tests/xml/ReasonCode.xml'));
+		Assert.equals('17794956-9bb6-4854-9712-bce5931e6e3a', response.getPaymentId());
+
+	},
+
 	readCardHolderMessage : function()
 	{
 		var response = api.parseCallbackXml(readFile('./tests/xml/CardHolderMessageMustBeShownFalse.xml'));
