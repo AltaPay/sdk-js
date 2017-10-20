@@ -10,6 +10,7 @@ var OrderLineTests = {
 		line.quantity = 34;
 		line.unitCode = 'kg';
 		line.taxAmount = 34;
+		line.taxPercent = 12;
 		line.discountPercent = 23;
 		line.imageUrl = 'http://image.url';
 		line.goodsType = 'item';
@@ -25,6 +26,7 @@ var OrderLineTests = {
 		Assert.equals('23',hash.discount);
 		Assert.equals('http://image.url',hash.imageUrl);
 		Assert.equals('item',hash.goodsType);
+		Assert.equals(12,hash.taxPercent);
 	}
 
 };

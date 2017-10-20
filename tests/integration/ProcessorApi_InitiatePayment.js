@@ -7,7 +7,7 @@ var ProcessorApi_InitiatePayment = {
 	{
 		factory = new RhinoAltaPayFactory(new AltaPayFactory());
 
-		papi = factory.getProcessorApi('shop api', 'testpassword', 'http://gateway.dev.earth.pensio.com');
+		papi = factory.getProcessorApi('shop api', 'testpassword', 'https://vmedev.pensio.com');
 	},
 
 	initiatePayment_simple : function()

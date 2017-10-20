@@ -7,13 +7,13 @@ var CreatePaymentRequestTests = {
 	{
 		factory = new RhinoAltaPayFactory(new AltaPayFactory());
 
-		mapi = factory.getMerchantApi('shop api', 'testpassword', 'http://gateway.dev.earth.pensio.com');
+		mapi = factory.getMerchantApi('shop api', 'testpassword', 'https://vmedev.pensio.com');
 	},
 
 	simple : function()
 	{
 		var request = factory.getPaymentRequest();
-		request.terminal = 'AltaPay Soap Test Terminal';
+		request.terminal = 'AltaPay Test Terminal';
 		request.shopOrderid = 'CreatePaymentRequestSimple_'+(new Date()).getTime();
 		request.amount = '20.15';
 		request.currency = 'EUR';
@@ -48,6 +48,7 @@ var CreatePaymentRequestTests = {
 		orderLine.itemId = '222';
 		orderLine.quantity = '1';
 		orderLine.taxPercent = '1.23';
+		orderLine.taxAmount = '3.23';
 		orderLine.unitCode = '654';
 		orderLine.unitPrice = '10.03';
 		orderLine.discountPercent = '1.03';
@@ -81,7 +82,7 @@ var CreatePaymentRequestTests = {
 
 		Assert.equals(true, response.success(), "Error: "+response.getErrorMessage());
 
-		Assert.equals(true, response.getUrl().contains("://gateway.dev.earth.pensio.com"), "Url was: "+response.getUrl() );
+		Assert.equals(true, response.getUrl().contains("://vmedev.pensio.com"), "Url was: "+response.getUrl() );
 	}
 }
 

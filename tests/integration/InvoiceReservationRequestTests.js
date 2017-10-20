@@ -7,7 +7,7 @@ var InvoiceReservationRequestTests = {
 	{
 		factory = new RhinoAltaPayFactory(new AltaPayFactory());
 
-		mapi = factory.getMerchantApi('shop api', 'testpassword', 'http://gateway.dev.earth.pensio.com');
+		mapi = factory.getMerchantApi('shop api', 'testpassword', 'https://vmedev.pensio.com');
 		//mapi = factory.getMerchantApi('shop api', 'testpassword', 'http://gateway.lb.earth.pensio.com');
 
 	},
@@ -60,6 +60,7 @@ var InvoiceReservationRequestTests = {
 		orderLine.itemId = '222';
 		orderLine.quantity = '1';
 		orderLine.taxPercent = '1.23';
+		orderLine.taxAmount = '4.55';
 		orderLine.unitCode = '654';
 		orderLine.unitPrice = '10.03';
 		orderLine.discountPercent = '1.03';
