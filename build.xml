@@ -60,7 +60,7 @@
             <param name="theFile" value="salesforce/SalesForceModules.js"/>
         </antcall>
 
-        <move file="output/out.js" tofile="output/Rhino-AltaPay-Jssdk-${altapay.release}.js" />
+        <move file="output/out.js" tofile="output/Rhino-AltaPay-Jssdk.js" />
 
     </target>
 
