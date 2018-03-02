@@ -60,3 +60,13 @@ else {
 The tests (both unit and integration) are a good source for seeing how the SDK is used.
 
 Enjoy :)
+
+Changelog
+------------
+
+* 1.0.0
+
+
+    ** Add the change log file and utilize Git tags;
+    ** Add/fetch ParameterSource 
+

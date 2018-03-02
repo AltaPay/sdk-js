@@ -1,7 +1,7 @@
 /**
  * Created by emerson on 6/20/17.
  *
- * Exporting of objects, necessary for the SalesForce (aka Demandware) javascript plugin.
+ * Exporting of objects, necessary for the SalesForce Commerce Cloud (aka Demandware) JavaScript plugin.
  *
  */
 

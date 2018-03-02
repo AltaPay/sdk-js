@@ -43,7 +43,6 @@ var ReservationTests = {
     setup : function()
     {
         factory = new RhinoAltaPayFactory(new AltaPayFactory());
-
         mapi = factory.getMerchantApi('shop api', 'testpassword', 'https://vmedev.pensio.com');
 
     },

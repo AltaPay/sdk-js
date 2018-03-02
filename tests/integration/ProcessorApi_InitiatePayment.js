@@ -92,6 +92,7 @@ var ProcessorApi_InitiatePayment = {
 		request.shopOrderid = 'InitiatePayment_'+(new Date()).getTime();
 		request.saleReconciliationIdentifier = 'my identifier yo';
 		request.authType = 'paymentAndCapture';
+		request.paymentSource = 'eCommerce';
 
 		var response = papi.initiatePayment(request);
 

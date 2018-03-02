@@ -57,6 +57,7 @@ var CreatePaymentRequestTests = {
 		request.shippingMethod = 'LowCost';
 		request.organisationNumber = '123123123';
 		request.accountOffer = 'required';
+		request.paymentSource = 'eCommerce';
 
 		request.customerInfo.email = 'my@e.mail';
 		request.customerInfo.username = 'username';

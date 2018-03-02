@@ -22,6 +22,7 @@ var GetPaymentsTests = {
 		request.creditCard.eyear = '2020';
 		request.creditCard.cvc = '123';
 		request.shopOrderid = 'GetPayments_'+(new Date()).getTime();
+		request.paymentSource = 'eCommerce';
 
 		authResponse = papi.initiatePayment(request);
 
@@ -43,7 +44,8 @@ var GetPaymentsTests = {
 		for(var k in payments)
 		{
 			Assert.equals(10, payments[k].getReservedAmount());
+			//TODO: Uncomment the next line as soon the VMDEV payment gateway is updated with the latest changes
+			//Assert.equals('eCommerce',payments[k].getPaymentSource());
 		}
-
 	}
 };

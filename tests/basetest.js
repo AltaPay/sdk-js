@@ -1,5 +1,4 @@
 
-
 load('tests/rhino_stuff/rhino_listFiles.js');
 load('tests/rhino_stuff/rhino_load_sdk.js');
 load('tests/jshamcrest.js');
@@ -139,14 +138,8 @@ Test.prototype.run = function(fromDir)
 			}
 			this.junit.push({'testcase':junitTest});
 		}
-
-
-
 		console.log("");
 	}
-
-
-
 
 	if(errors.length > 0)
 	{
@@ -158,7 +151,6 @@ Test.prototype.run = function(fromDir)
 		}
 	}
 	console.log("");
-
 };
 
 Test.prototype.getJunitResult = function()
