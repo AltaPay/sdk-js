@@ -64,9 +64,12 @@ Enjoy :)
 Changelog
 ------------
 
-* 1.0.0
-
+* 1.0.1
 
     ** Add the change log file and utilize Git tags;
+    
     ** Add/fetch ParameterSource 
 
+* 1.0.0
+
+    ** First milestone
