@@ -69,17 +69,20 @@
         </antcall>
 
         <move file="output/out.js" tofile="output/Rhino-AltaPay-Jssdk.js" />
-
+        <!-- Archive the latest build package with the latest version in the name -->
+        <zip destfile="output/Rhino-AltaPay-JsSDK_${GitLastTag}.zip">
+            <fileset dir="output">
+                <include name="Rhino-AltaPay-Jssdk.js" />
+            </fileset>
+        </zip>
     </target>
 
     <target name="copyDirToBuild">
-
         <foreach target="copyFile" param="theFile">
             <fileset dir="${dir}" casesensitive="yes">
                 <include name="**/*.js"/>
             </fileset>
         </foreach>
-
     </target>
 
     <target name="copyFile">
