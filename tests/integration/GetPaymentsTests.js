@@ -9,8 +9,8 @@ var GetPaymentsTests = {
 	{
 		factory = new RhinoAltaPayFactory(new AltaPayFactory());
 
-		papi = factory.getProcessorApi('shop api', 'testpassword', 'https://vmedev.pensio.com');
-		mapi = factory.getMerchantApi('shop api', 'testpassword', 'https://vmedev.pensio.com');
+		papi = factory.getProcessorApi('shop api', 'testpassword', 'https://testgateway.altapaysecure.com');
+		mapi = factory.getMerchantApi('shop api', 'testpassword', 'https://testgateway.altapaysecure.com');
 
 		var request = factory.getInitiatePaymentRequest();
 

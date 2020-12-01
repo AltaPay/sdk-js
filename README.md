@@ -33,7 +33,7 @@ var factory = new RhinoAltaPayFactory();
 
 // the Merchant API is the second most important object
 // since this handles the communication with the gateway
-var mapi = factory.getMerchantApi('username', 'password', 'https://testgateway.pensio.com');
+var mapi = factory.getMerchantApi('username', 'password', 'https://testgateway.altapaysecure.com');
 
 // all the methods on the API are message based
 // to create a new payment we need a PaymentRequest

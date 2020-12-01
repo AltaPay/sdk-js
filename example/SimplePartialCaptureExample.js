@@ -2,7 +2,7 @@ load('tests/basetest.js');
 
 var factory = new RhinoAltaPayFactory(new AltaPayFactory());
 
-var mapi = factory.getMerchantApi('shop api', 'testpassword', 'https://vmedev.pensio.com');
+var mapi = factory.getMerchantApi('shop api', 'testpassword', 'https://testgateway.altapaysecure.com');
 
 var reservationId = createReservation("simple_partial_capture_");
 var request = factory.getCaptureRequest();
