@@ -3,6 +3,9 @@ function AltaPayFactory() {
 }
 
 /**
+ * URL is to connect to your gateway instance. If you are in doubt contact support.
+ * For test, use: testgateway.altapaysecure.com
+ *
  * @returns {MerchantApi}
  */
 AltaPayFactory.prototype.getMerchantApi = function(username, password, url) {
@@ -22,6 +25,9 @@ AltaPayFactory.prototype.getMerchantApi = function(username, password, url) {
 };
 
 /**
+ * URL is to connect to your gateway instance. If you are in doubt contact support.
+ * For test, use: testgateway.altapaysecure.com
+ *
  * @returns {ProcessorApi}
  */
 AltaPayFactory.prototype.getProcessorApi = function(username, password, url) {
