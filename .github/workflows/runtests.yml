@@ -21,15 +21,6 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
-    # Build package
-    - name: Build
-      run: ant
-      
-    # List package
-    - name: Build
-      run: dir build/
-      
-    - uses: actions/upload-artifact@v2
-      with:
-        name: Package
-        path: build/
+    # Run Test
+    - name: Run Test
+      run: java -jar tests/js.jar tests/unit_suite.js
