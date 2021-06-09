@@ -61,15 +61,17 @@ The tests (both unit and integration) are a good source for seeing how the SDK i
 
 Enjoy :)
 
-Changelog
-------------
+## Change Log
 
-* 1.0.1
+### 1.0.2
 
-    ** Add the change log file and utilize Git tags;
-    
-    ** Add/fetch ParameterSource 
+- Supports API changes from 20210324
 
-* 1.0.0
+### 1.0.1
 
-    ** First milestone
+- Add the change log file and utilize Git tags
+- Add/fetch ParameterSource 
+
+### 1.0.0
+
+- First milestone
