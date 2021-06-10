@@ -1,0 +1,30 @@
+{
+  "name": "altapay-js-api",
+  "version": "1.0.2",
+  "description": "This is an SDK for AltaPay written in JavaScript. It is written in a way that makes it possible to use in whatever JavaScript context is necessary (Node, Rhino etc).",
+  "main": "AltaPayFactory.js",
+  "directories": {
+    "example": "example",
+    "lib": "lib",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "java -jar tests/js.jar tests/unit_suite.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AltaPay/sdk-js.git"
+  },
+  "keywords": [
+    "altapay-sdk",
+    "altapay_api",
+    "sdk-js",
+    "altapay-sdk-js"
+  ],
+  "author": "AltaPay",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AltaPay/sdk-js/issues"
+  },
+  "homepage": "https://github.com/AltaPay/sdk-js#readme"
+}
