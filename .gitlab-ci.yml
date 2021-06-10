@@ -1,9 +1,0 @@
-image: php:latest
-
-stages:
-    - dummy
-
-dummy:
-    stage: dummy
-    script:
-        echo "You shall just pass!"

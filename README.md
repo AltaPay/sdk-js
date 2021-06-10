@@ -66,6 +66,7 @@ Enjoy :)
 ### 1.0.2
 
 - Supports API changes from 20210324
+- Fix library compatibility issue in UnitTest
 
 ### 1.0.1
 
