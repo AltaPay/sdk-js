@@ -3,9 +3,22 @@ JS SDK
 
 This is an SDK for AltaPay written in JavaScript. It is written in a way that makes it possible to use in whatever JavaScript context is necessary (Node, Rhino etc).
 
+## Requirements
 
-Running test
-------------
+1- Make sure you have a Java environment installed. See [System Requirements](https://ant.apache.org/manual/install.html#sysrequirements) for details.
+
+2- Download/Install Ant.
+
+3- Set environmental variables: JAVA_HOME to your Java environment, ANT_HOME to the directory you uncompressed Ant to, and add ${ANT_HOME}/bin (Unix) or %ANT_HOME%\bin (Windows) to your PATH.
+
+### Build package
+
+Start the build process by going to the repository directory from the terminal and run:
+
+    $ ant
+
+
+### Running test
 
 We are using Rhino to run unit tests.
 
@@ -16,9 +29,7 @@ cd <clone>
 ./tasks/runIntegrationTests.sh
 ```
 
-
-
-Using it
+### Using it
 --------
 
 The SDK has been written to be extensible. This has been achieved by using dependency injection centered around the `AltaPayFactory`.
@@ -61,15 +72,18 @@ The tests (both unit and integration) are a good source for seeing how the SDK i
 
 Enjoy :)
 
-Changelog
-------------
+## Change Log
 
-* 1.0.1
+### 1.0.2
 
-    ** Add the change log file and utilize Git tags;
-    
-    ** Add/fetch ParameterSource 
+- Supports API changes from 20210324
+- Fix library compatibility issue in UnitTest
 
-* 1.0.0
+### 1.0.1
 
-    ** First milestone
+- Add the change log file and utilize Git tags
+- Add/fetch ParameterSource 
+
+### 1.0.0
+
+- First milestone

@@ -3,11 +3,11 @@ var Base64Tests = {
 	encode_matchesEncodingFromJava : function()
 	{
 		var base64 = new Base64();
-		var javascript = base64.encode("Hatten hopper over åen");
-		var javaString = java.lang.String("Hatten hopper over åen");
-
-		var javaBase64encoded = javax.xml.bind.DatatypeConverter.printBase64Binary(javaString.getBytes());
-
+		var javascript = base64.encode("Muh sagde katten, da den troede, det var en ko");
+		var javaString = java.lang.String("Muh sagde katten, da den troede, det var en ko");
+		
+		var javaBase64encoded = java.util.Base64.getEncoder().encodeToString(javaString.getBytes());
+		
 		Assert.equals(javascript, javaBase64encoded);
 	},
 
