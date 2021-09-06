@@ -25,9 +25,6 @@ jobs:
           file-url: https://unpkg.com/altapay-js-api@latest/package.json
           static-checking: localIsNew
           
-      - name: Log version change
-        run: 'echo "Version change found in commit ${{ steps.check.outputs.commit }}! New version: ${{ steps.check.outputs.version }} (${{ steps.check.outputs.type }})"'
-
       - name: Install dependencies
         if: steps.check.outputs.changed == 'true'
         run: npm install
