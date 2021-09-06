@@ -26,12 +26,12 @@ jobs:
           static-checking: localIsNew
           
       - name: Log when changed
-        if: steps.check.outputs.changed == 'true'
+#         if: steps.check.outputs.changed == 'true'
         run: 'echo "Version change found in commit ${{ steps.check.outputs.commit }}! New version: ${{ steps.check.outputs.version }} (${{ steps.check.outputs.type }})"'
 
       - name: Log when unchanged
-        if: steps.check.outputs.changed == 'false'
-        run: 'echo "No version change :/"'
+#         if: steps.check.outputs.changed == 'false'
+        run: 'echo "version change : ${{ steps.check.outputs.changed }}"'
 
       - name: Version update detected
         if: steps.check.outputs.changed == 'true'
