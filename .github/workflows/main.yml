@@ -1,0 +1,34 @@
+name: 'Publish'
+
+# Only trigger, when the build workflow succeeded
+# Triggers the workflow on push event but only for the master branch
+on:
+  push:
+    branches: [ main ]
+    
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10
+        
+      - name: Check if version has been updated
+        id: check
+        uses: EndBug/version-check@v1
+        with:
+          file-url: https://unpkg.com/altapay-js-api@latest/package.json
+          static-checking: localIsNew
+          
+      - name: Install dependencies
+        if: steps.check.outputs.changed == 'true'
+        run: npm install
+
+      - name: Publish the package to NPM
+        if: steps.check.outputs.changed == 'true'
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # NPM will automatically authenticate with this
