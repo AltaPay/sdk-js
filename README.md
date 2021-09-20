@@ -11,9 +11,25 @@ This is an SDK for AltaPay written in JavaScript. It is written in a way that ma
 
 3- Set environmental variables: JAVA_HOME to your Java environment, ANT_HOME to the directory you uncompressed Ant to, and add ${ANT_HOME}/bin (Unix) or %ANT_HOME%\bin (Windows) to your PATH.
 
+### Install package
+
+**Method 1**
+
+Clone the current repository for the build process.
+
+``` git clone https://github.com/AltaPay/sdk-js.git```
+
+**Method 2**
+
+Install the package via npm. Run the following command:
+
+``` npm i altapay-js-api ```
+
 ### Build package
 
 Start the build process by going to the repository directory from the terminal and run:
+
+> If you install the dependency using Method 2 then you have to run below command in `node_modules/altapay-js-api`
 
     $ ant
 
