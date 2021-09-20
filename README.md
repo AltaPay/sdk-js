@@ -21,13 +21,13 @@ Clone the current repository for the build process.
 
 **Method 2**
 
-Install the package via npm. Run the following command:
+Install the package via npm
 
 ``` npm i altapay-js-api ```
 
-### Build package
+### How to build
 
-Start the build process by going to the repository directory from the terminal and run:
+Run below command to build the package
 
 > If you install the dependency using Method 2 then you have to run below command in `node_modules/altapay-js-api`
 
