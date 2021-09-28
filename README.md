@@ -29,7 +29,7 @@ Install the package via npm
 
 Run below command to build the package
 
-> If you install the dependency using Method 2 then you have to run below command in `node_modules/altapay-js-api`
+> If you install the dependency using Method 1 then you have to run below command in the root
 
     $ ant
 
@@ -89,6 +89,10 @@ The tests (both unit and integration) are a good source for seeing how the SDK i
 Enjoy :)
 
 ## Change Log
+
+### 1.0.3
+
+- Remove SDK source file from npm publish
 
 ### 1.0.2
 
