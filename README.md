@@ -3,33 +3,34 @@ JS SDK
 
 This is an SDK for AltaPay written in JavaScript. It is written in a way that makes it possible to use in whatever JavaScript context is necessary (Node, Rhino etc).
 
-## Requirements
-
-1- Make sure you have a Java environment installed. See [System Requirements](https://ant.apache.org/manual/install.html#sysrequirements) for details.
-
-2- Download/Install Ant.
-
-3- Set environmental variables: JAVA_HOME to your Java environment, ANT_HOME to the directory you uncompressed Ant to, and add ${ANT_HOME}/bin (Unix) or %ANT_HOME%\bin (Windows) to your PATH.
-
 ### Install package
 
 **Method 1**
-
-Clone the current repository for the build process.
-
-``` git clone https://github.com/AltaPay/sdk-js.git```
-
-**Method 2**
 
 Install the package via npm
 
 ``` npm i altapay-js-api ```
 
+**Method 2**
+
+Clone the current repository for the build process.
+
+``` git clone https://github.com/AltaPay/sdk-js.git```
+
+
 ### How to build
+
+**Prerequisites:**
+
+* Make sure you have a Java environment installed. See [System Requirements](https://ant.apache.org/manual/install.html#sysrequirements) for details.
+
+* Download/Install Ant.
+
+* Set environmental variables: JAVA_HOME to your Java environment, ANT_HOME to the directory you uncompressed Ant to, and add ${ANT_HOME}/bin (Unix) or %ANT_HOME%\bin (Windows) to your PATH.
 
 Run below command to build the package
 
-> If you install the dependency using Method 1 then you have to run below command in the root
+> If you install the dependency using Method 2 then you have to run below command in the root
 
     $ ant
 
