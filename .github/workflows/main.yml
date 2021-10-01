@@ -5,6 +5,8 @@ name: 'Publish'
 on:
   push:
     branches: [ main ]
+  pull_request:
+     branches: [ main ]    
     
 jobs:
   publish:
@@ -30,6 +32,10 @@ jobs:
       - name: Build the package
         if: steps.check.outputs.changed == 'true'
         run: npm run-script build
+                
+      - name: Creare .npmrc file the package
+        if: steps.check.outputs.changed == 'true'
+        run: echo //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }} > .npmrc       
 
       - name: Publish the package to NPM
         if: steps.check.outputs.changed == 'true'
