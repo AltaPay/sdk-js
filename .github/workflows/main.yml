@@ -4,9 +4,7 @@ name: 'Publish'
 # Triggers the workflow on push event but only for the master branch
 on:
   push:
-    branches: [ main ]
-  pull_request:
-     branches: [ main ]    
+    branches: [ main ]  
     
 jobs:
   publish:
@@ -33,7 +31,7 @@ jobs:
         if: steps.check.outputs.changed == 'true'
         run: npm run-script build
                 
-      - name: Creare .npmrc file the package
+      - name: Create .npmrc file
         if: steps.check.outputs.changed == 'true'
         run: echo //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }} > .npmrc       
 
