@@ -27,8 +27,12 @@ jobs:
         if: steps.check.outputs.changed == 'true'
         run: npm install
 
+      - name: Build the package
+        if: steps.check.outputs.changed == 'true'
+        run: npm run-script build
+
       - name: Publish the package to NPM
         if: steps.check.outputs.changed == 'true'
-        run: npm publish
+        run: npm publish output
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # NPM will automatically authenticate with this
