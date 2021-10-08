@@ -1,32 +1,31 @@
-JS SDK
-======
+# AltaPay - JS SDK
 
 This is an SDK for AltaPay written in JavaScript. It is written in a way that makes it possible to use in whatever JavaScript context is necessary (Node, Rhino etc).
 
-### Install package
+## Installation
 
-**Method 1**
+### Method 1
 
 Install the package via npm
 
 ``` npm i altapay-js-api ```
 
-**Method 2**
+### Method 2
 
 Clone the current repository for the build process.
 
 ``` git clone https://github.com/AltaPay/sdk-js.git```
 
 
-### How to build
+## How to Build
 
-**Prerequisites:**
+### Prerequisites:
 
-* Make sure you have a Java environment installed. See [System Requirements](https://ant.apache.org/manual/install.html#sysrequirements) for details.
+- Make sure you have a Java environment installed. See [System Requirements](https://ant.apache.org/manual/install.html#sysrequirements) for details.
 
-* Download/Install Ant.
+- Download/Install Ant.
 
-* Set environmental variables: JAVA_HOME to your Java environment, ANT_HOME to the directory you uncompressed Ant to, and add ${ANT_HOME}/bin (Unix) or %ANT_HOME%\bin (Windows) to your PATH.
+- Set environmental variables: JAVA_HOME to your Java environment, ANT_HOME to the directory you uncompressed Ant to, and add ${ANT_HOME}/bin (Unix) or %ANT_HOME%\bin (Windows) to your PATH.
 
 Run below command to build the package
 
@@ -35,7 +34,7 @@ Run below command to build the package
     $ ant
 
 
-### Running test
+## Running test
 
 We are using Rhino to run unit tests.
 
@@ -46,8 +45,7 @@ cd <clone>
 ./tasks/runIntegrationTests.sh
 ```
 
-### Using it
---------
+## Using it
 
 The SDK has been written to be extensible. This has been achieved by using dependency injection centered around the `AltaPayFactory`.
 
@@ -89,22 +87,17 @@ The tests (both unit and integration) are a good source for seeing how the SDK i
 
 Enjoy :)
 
-## Change Log
+## Changelog
 
-### 1.0.3
+See [Changelog](CHANGELOG.md) for all the release notes.
 
-- Remove SDK source file from npm publish
+## License
 
-### 1.0.2
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
-- Supports API changes from 20210324
-- Fix library compatibility issue in UnitTest
+## Documentation
 
-### 1.0.1
+For more details please see [AltaPay docs](https://documentation.altapay.com/)
 
-- Add the change log file and utilize Git tags
-- Add/fetch ParameterSource 
-
-### 1.0.0
-
-- First milestone
+## Contact
+Feel free to contact our support team (support@altapay.com) if you need any assistance.
