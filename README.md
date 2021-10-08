@@ -85,8 +85,6 @@ else {
 
 The tests (both unit and integration) are a good source for seeing how the SDK is used.
 
-Enjoy :)
-
 ## Changelog
 
 See [Changelog](CHANGELOG.md) for all the release notes.
