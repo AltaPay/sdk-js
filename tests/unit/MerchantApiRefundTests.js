@@ -32,7 +32,7 @@ var MerchantApiRefundTests = {
 	{
 		api.refund(request);
 
-		JsMockito.verify(http).post(JsHamcrest.Matchers.anything(), JsHamcrest.Matchers.anything(), AltaPayMatchers.objectEquals({'Authorization':'Basic dXNlcm5hbWU6cGFzc3dvcmQ=','x-altapay-client-version':JssdkVersion.VERSION}));
+		JsMockito.verify(http).post(JsHamcrest.Matchers.anything(), JsHamcrest.Matchers.anything(), AltaPayMatchers.objectEquals({'Authorization':'Basic dXNlcm5hbWU6cGFzc3dvcmQ=','x-altapay-client-version':JssdkVersion.VERSION,'User-Agent':JssdkVersion.VERSION}));
 	},
 
 	callHttpWithCorrectParameters : function()
