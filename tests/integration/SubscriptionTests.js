@@ -14,7 +14,7 @@ var SubscriptionTests = {
 
 		var request = factory.getReservationRequest();
 
-		request.amount = 7;
+		request.amount = 10;
 		request.terminal = 'AltaPay Test Terminal';
 		request.currency = 'EUR';
 		request.cardnum = '4111111111111111';
@@ -37,15 +37,15 @@ var SubscriptionTests = {
 	{
 		var request = factory.getChargeRequest();
 		request.subscriptionPaymentId = authResponse.getPaymentId();
-		request.amount = 3;
+		request.amount = 8;
 		request.reconciliationIdentifier = 'my reconciliation identifier';
 
 		var response = mapi.chargeSubscription(request);
 
 		Assert.equals(true, response.success(), "Error: "+response.getErrorMessage());
-		Assert.equals(7, response.getSubscriptionPayment().getRecurringDefaultAmount());
+		Assert.equals(10, response.getSubscriptionPayment().getRecurringDefaultAmount());
 		Assert.equals(authResponse.getPaymentId(), response.getSubscriptionPayment().getPaymentId());
-		Assert.equals(3, response.getChargePayment().getCapturedAmount());
+		Assert.equals(8, response.getChargePayment().getCapturedAmount());
 		Assert.equals('my reconciliation identifier', response.getChargePayment().getReconciliationIdentifier());
 	},
 
@@ -53,15 +53,15 @@ var SubscriptionTests = {
 	{
 		var request = factory.getChargeRequest();
 		request.subscriptionPaymentId = authResponse.getPaymentId();
-		request.amount = 3;
+		request.amount = 8;
 		request.agreementUnscheduledType = AgreementUnscheduledType.incremental;
 
 		var response = mapi.reserveSubscriptionCharge(request);
 
 		Assert.equals(true, response.success(), "Error: "+response.getErrorMessage());
-		Assert.equals(7, response.getSubscriptionPayment().getRecurringDefaultAmount());
+		Assert.equals(10, response.getSubscriptionPayment().getRecurringDefaultAmount());
 		Assert.equals(authResponse.getPaymentId(), response.getSubscriptionPayment().getPaymentId());
-		Assert.equals(3, response.getChargePayment().getReservedAmount());
+		Assert.equals(8, response.getChargePayment().getReservedAmount());
 		Assert.equals(0, response.getChargePayment().getCapturedAmount());
 
 		request = factory.getCaptureRequest();

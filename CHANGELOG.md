@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.5]
+
+- Add support for new 'Agreements Engine' parameters
+- Add support for Apple Pay
+
 ## [1.0.4]
 
 - Update format of the User-Agent header
