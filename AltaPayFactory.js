@@ -250,3 +250,9 @@ AltaPayFactory.prototype.getUpdateOrderRequest = function(paymentId, orderLines)
 AltaPayFactory.prototype.getAgreementConfig = function() {
 	return new AgreementConfig();
 };
+/**
+ * @returns {AgreementConfig}
+ */
+AltaPayFactory.prototype.getAgreementConfig = function() {
+	return new AgreementConfig();
+};
