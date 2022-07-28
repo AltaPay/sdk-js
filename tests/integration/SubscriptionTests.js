@@ -12,19 +12,23 @@ var SubscriptionTests = {
 		papi = factory.getProcessorApi('shop api', 'testpassword', 'https://testgateway.altapaysecure.com');
 		mapi = factory.getMerchantApi('shop api', 'testpassword', 'https://testgateway.altapaysecure.com');
 
-		var request = factory.getInitiatePaymentRequest();
+		var request = factory.getReservationRequest();
 
 		request.amount = 10;
 		request.terminal = 'AltaPay Test Terminal';
 		request.currency = 'EUR';
-		request.creditCard.cardnum = '4111111111111111';
-		request.creditCard.emonth = '11';
-		request.creditCard.eyear = '2020';
-		request.creditCard.cvc = '123';
-		request.authType = 'subscription';
-		request.shopOrderid = 'InitiatePayment_'+(new Date()).getTime();
+		request.cardnum = '4111111111111111';
+		request.emonth = '11';
+		request.eyear = '2025';
+		request.cvc = '123';
+		request.type = AuthType.subscription;
+		request.shopOrderid = 'JS_AUI_IT_'+(new Date()).getTime();
+		var agreementConfig = factory.getAgreementConfig();
+		agreementConfig.agreementType = AgreementType.unscheduled;
+		agreementConfig.agreementUnscheduledType = AgreementUnscheduledType.incremental;
+		request.agreementConfig = agreementConfig;
 
-		authResponse = papi.initiatePayment(request);
+		authResponse = mapi.reservation(request);
 
 		Assert.equals(true, authResponse.success(), "Error: "+authResponse.getErrorMessage());
 	},
@@ -45,11 +49,12 @@ var SubscriptionTests = {
 		Assert.equals('my reconciliation identifier', response.getChargePayment().getReconciliationIdentifier());
 	},
 
-	reserveSubscriptionCharge : function()
+	reserveSubscriptionChargeAndCaptureReservation : function()
 	{
 		var request = factory.getChargeRequest();
 		request.subscriptionPaymentId = authResponse.getPaymentId();
 		request.amount = 8;
+		request.agreementUnscheduledType = AgreementUnscheduledType.incremental;
 
 		var response = mapi.reserveSubscriptionCharge(request);
 
@@ -58,5 +63,15 @@ var SubscriptionTests = {
 		Assert.equals(authResponse.getPaymentId(), response.getSubscriptionPayment().getPaymentId());
 		Assert.equals(8, response.getChargePayment().getReservedAmount());
 		Assert.equals(0, response.getChargePayment().getCapturedAmount());
+
+		request = factory.getCaptureRequest();
+		request.paymentId = response.getChargePayment().getPaymentId();
+		request.amount = 3;
+
+		response = mapi.capture(request);
+
+		Assert.equals(true, response.success(), "Error: "+response.getErrorMessage());
+		Assert.equals(3, response.getCapturedAmount());
+
 	}
 };
