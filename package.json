@@ -1,6 +1,6 @@
 {
   "name": "altapay-js-api",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "This is an SDK for AltaPay written in JavaScript. It is written in a way that makes it possible to use in whatever JavaScript context is necessary (Node, Rhino etc).",
   "main": "Rhino-AltaPay-Jssdk.js",
   "directories": {
