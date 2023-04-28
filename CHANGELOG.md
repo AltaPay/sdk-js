@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## [1.0.6]
 
 - Enforce the right HTTP methods on all API endpoints.
+- Supports API changes from 20230412
 
 ## [1.0.5]
 
