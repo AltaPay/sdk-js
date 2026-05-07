@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.1.0]
+
+- Implement checkoutSession endpoint support
+
 ## [1.0.6]
 
 - Enforce the right HTTP methods on all API endpoints.
