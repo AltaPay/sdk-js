@@ -89,6 +89,13 @@ AltaPayFactory.prototype.getPaymentRequest = function() {
 };
 
 /**
+ * @returns {CheckoutSessionRequest}
+ */
+AltaPayFactory.prototype.getCheckoutSessionRequest = function() {
+	return new CheckoutSessionRequest(this.getPaymentRequestBase(), this.getCustomerInfo());
+};
+
+/**
  * @returns {InitiatePaymentRequest}
  */
 AltaPayFactory.prototype.getInitiatePaymentRequest = function() {

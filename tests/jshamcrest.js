@@ -480,7 +480,7 @@ JsHamcrest.Matchers.raisesAnything = function() {
 			try {
 				actualFunction();
 			} catch (e) {
-				return true;
+				return e !== undefined;
 			}
 			return false;
 		},
